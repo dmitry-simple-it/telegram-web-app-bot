@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "declaration": false,
+    "removeComments": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "target": "esnext",
+    "sourceMap": true,
+    "moduleResolution": "Node",
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx"
+  }
+}
