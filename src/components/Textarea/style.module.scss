@@ -1,0 +1,26 @@
+.textarea {
+  position: relative;
+  width: 100%;
+
+  &_input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--tg-theme-text-color);
+    font-family: Open-Sans, sans-serif;
+    font-size: 14px;
+    padding: 18px 12px;
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  &_error {
+    position: absolute;
+    font-family: Open-Sans, sans-serif;
+    font-size: 10px;
+    color: #f00;
+    top: 80px;
+    left: 12px;
+  }
+}

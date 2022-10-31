@@ -1,0 +1,29 @@
+.text-input {
+  position: relative;
+  width: 100%;
+
+  &_input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--tg-theme-text-color);
+    padding: 12px 12px;
+    font-family: Open-Sans, sans-serif;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: rgb(128, 128, 128);
+    }
+  }
+
+  &_error {
+    font-family: Open-Sans, sans-serif;
+    font-size: 10px;
+    position: absolute;
+    color: #f00;
+    top: 46px;
+    left: 12px;
+  }
+}
