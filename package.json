@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "webpack-dev-server -c webpack.config.js --mode development --open",
+    "start:bot": "ts-node bot/index.ts",
+    "start:web": "webpack-dev-server -c webpack.config.js --mode development --open",
     "build": "webpack -c webpack.config.js --mode production",
     "prettier": "prettier -w .",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx -c .eslintrc"
@@ -13,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.3.2",
+    "dotenv": "^16.0.3",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -48,6 +50,7 @@
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.6",
     "ts-loader": "^9.4.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",

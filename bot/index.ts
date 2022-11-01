@@ -1,9 +1,17 @@
 import { Telegraf } from 'telegraf';
+import { config } from 'dotenv';
 
-const TOKEN = '5423214063:AAHPA1csFr88SBAp_EMZu44MwiGN5dKpMXY';
-const webAppUrl = 'https://ornate-cranachan-90a615.netlify.app/';
+config();
 
-const bot = new Telegraf(TOKEN);
+const token = process.env.TG_BOT_TOKEN || '';
+const webAppUrl = process.env.TG_DEPLOY_URL || '';
+
+if (!(token && webAppUrl)) {
+  console.error('Bot API Token and Web App Url are required');
+  process.exit(1);
+}
+
+const bot = new Telegraf(token);
 
 bot.start((ctx) => {
   ctx.reply(
