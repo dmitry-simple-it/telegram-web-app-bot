@@ -13,12 +13,12 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     return (
       <div className={classes.textInput}>
         <input
-          className={classNames(className, classes.textInputInput)}
+          className={classNames(className, classes.textInput_input)}
           autoComplete="off"
           {...props}
           ref={ref}
         />
-        {error && <div className={classes.textInputError}>{error}</div>}
+        {error && <div className={classes.textInput_error}>{error}</div>}
       </div>
     );
   },

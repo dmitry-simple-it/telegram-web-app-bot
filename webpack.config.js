@@ -6,6 +6,8 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
 const babelOptions = {
   loader: 'babel-loader',
   options: {
@@ -77,7 +79,18 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { modules: { exportLocalsConvention: 'camelCase' } },
+            options: {
+              modules: {
+                exportLocalsConvention: (className) => {
+                  const classNameWords = className.split('-');
+                  if (!classNameWords.length) return className;
+                  return [
+                    classNameWords[0],
+                    classNameWords.slice(1).map(capitalize).join(''),
+                  ].join('');
+                },
+              },
+            },
           },
           'postcss-loader',
           'sass-loader',
@@ -86,6 +99,10 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
+      },
+      {
+        test: /\.svg$/i,
+        use: '@svgr/webpack',
       },
     ],
   },

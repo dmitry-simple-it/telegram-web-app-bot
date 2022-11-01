@@ -41,17 +41,17 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className={classes.textarea}>
         <textarea
-          className={classNames(className, classes.textareaInput)}
+          className={classNames(className, classes.textarea_input)}
           ref={(node) => {
             textareaRef.current = node;
             if (typeof ref === 'function') ref(node);
-            else if (ref) textareaRef.current = node;
+            else if (ref) ref.current = node;
           }}
           onChange={handleChange}
           {...props}
         />
         {error && (
-          <div ref={errorMessageRef} className={classes.textareaError}>
+          <div ref={errorMessageRef} className={classes.textarea_error}>
             {error}
           </div>
         )}

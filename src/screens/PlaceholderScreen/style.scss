@@ -1,0 +1,23 @@
+.placeholder-screen {
+  width: 100%;
+  height: 100%;
+  background-color: var(--tg-theme-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_react-logo {
+    width: 40%;
+    max-width: 250px;
+    animation: React-logo-spin 5s infinite linear;
+  }
+}
+
+@keyframes React-logo-spin {
+  from {
+    transform: translateY(-65%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-65%) rotate(360deg);
+  }
+}

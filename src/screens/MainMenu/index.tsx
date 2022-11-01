@@ -13,7 +13,7 @@ const MainMenu: FC = () => {
     <div className="main-menu">
       {menuItems.map((item, index) => (
         <MenuItem
-          icon={item.icon}
+          Icon={item.icon}
           label={item.label}
           key={index}
           onClick={() => {

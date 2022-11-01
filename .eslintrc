@@ -11,5 +11,9 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "JSX": true,
+    "React": true
+  },
   "ignorePatterns": ["/node_modules/**", "/build/**"]
 }

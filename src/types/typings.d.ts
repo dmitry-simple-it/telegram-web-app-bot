@@ -1,6 +1,15 @@
 declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
+declare module '*.gif';
 
-declare module '*.css' {
+declare module '*.svg' {
+  import { ReactSVGComponent } from './types';
+  const svg: ReactSVGComponent;
+  export = svg;
+}
+
+declare module '*.(css|scss)' {
   interface IClassNames {
     [className: string]: string;
   }

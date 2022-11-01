@@ -1,14 +1,24 @@
 import { FC } from 'react';
 
+import { ReactSVGComponent } from '../../../types/types';
+import { WebApp } from '../../../utils/tgWebApp';
+
 type MenuItemProps = {
-  icon: string;
+  Icon: string | ReactSVGComponent;
   label: string;
   onClick: (id: string) => void;
 };
 
-const MenuItem: FC<MenuItemProps> = ({ icon, label, onClick }) => (
+const MenuItem: FC<MenuItemProps> = ({ Icon, label, onClick }) => (
   <div className="main-menu_item" onClick={() => onClick(label)}>
-    <img className="main-menu_item_image" src={icon} alt={label} />
+    {typeof Icon === 'string' ? (
+      <img className="main-menu_item_image" src={Icon} alt={label} />
+    ) : (
+      <Icon
+        className="main-menu_item_image"
+        fill={WebApp.themeParams.link_color || '#33bcd7'}
+      />
+    )}
     <div className="main-menu_item_text">{label}</div>
   </div>
 );

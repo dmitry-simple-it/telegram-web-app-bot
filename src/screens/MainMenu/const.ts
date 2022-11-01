@@ -1,33 +1,35 @@
-import PhoneHandset from '../../assets/phone_handset.png';
-import PlayIcon from '../../assets/play_icon.png';
-import TelegramLogo from '../../assets/telegram_logo.png';
-import ToolsetIcon from '../../assets/toolset_icon.png';
+import PaperPlane from '../../assets/paper-plane.svg';
+import PhoneCall from '../../assets/phone-call.svg';
+import Play from '../../assets/play.svg';
+import Briefcase from '../../assets/briefcase.svg';
+
+import { ReactSVGComponent } from '../../types/types';
 
 type MenuItemType = {
-  icon: string;
+  icon: string | ReactSVGComponent;
   label: string;
   route: string;
 };
 
 export const menuItems: Array<MenuItemType> = [
   {
-    icon: TelegramLogo,
+    icon: PaperPlane,
     label: 'Оставить заявку',
     route: '/contact_form',
   },
   {
-    icon: PhoneHandset,
+    icon: PhoneCall,
     label: 'Связаться',
-    route: '/',
+    route: '/contact',
   },
   {
-    icon: PlayIcon,
+    icon: Play,
     label: 'Поиграться',
-    route: '/',
+    route: '/play',
   },
   {
-    icon: ToolsetIcon,
+    icon: Briefcase,
     label: 'Наши услуги',
-    route: '/',
+    route: '/services',
   },
 ];

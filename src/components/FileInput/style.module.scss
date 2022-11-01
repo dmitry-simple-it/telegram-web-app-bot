@@ -13,9 +13,15 @@
   }
 
   &_clip {
-    max-width: 40px;
-    max-height: 40px;
+    max-width: 36px;
+    max-height: 36px;
     margin-right: 12px;
+  }
+
+  &_spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &_text {
@@ -30,6 +36,6 @@
     font-family: Open-Sans, sans-serif;
     font-size: 10px;
     color: #f00;
-    top: 46px;
+    top: 43px;
   }
 }

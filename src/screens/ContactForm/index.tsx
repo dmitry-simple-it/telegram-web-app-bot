@@ -160,7 +160,6 @@ const ContactForm: FC = () => {
       {formError && (
         <div className="contact-form_error">Ошибка: {formError}</div>
       )}
-      <button>Submit</button>
     </form>
   );
 };
