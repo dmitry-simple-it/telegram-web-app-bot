@@ -27,7 +27,6 @@ export const useTgMainButton = ({
     WebApp.MainButton.setParams({
       color: color,
       text_color: textColor,
-      is_visible: true,
       is_active: true,
     });
     return () => {

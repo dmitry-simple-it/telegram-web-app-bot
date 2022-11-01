@@ -11,7 +11,6 @@ export const useTgBackButton = (callback: () => void) => {
 
   useEffect(() => {
     WebApp.BackButton.show();
-    WebApp.BackButton.isVisible = true;
 
     return () => WebApp.BackButton.hide();
   }, []);

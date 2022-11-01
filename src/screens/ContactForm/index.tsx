@@ -89,6 +89,10 @@ const ContactForm: FC = () => {
     return () => clearTimeout(timeoutId);
   }, [formError]);
 
+  useEffect(() => {
+    WebApp.expand();
+  }, []);
+
   return (
     <form className="contact-form" onSubmit={handleFormSubmit}>
       <div className="contact-form_group">
