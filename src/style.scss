@@ -8,11 +8,40 @@
   .fade-enter {
     opacity: 0;
     z-index: 1;
+
+    &.fade-enter-active {
+      opacity: 1;
+      transition: opacity 300ms ease-in;
+    }
   }
 
-  .fade-enter.fade-enter-active {
+  .fade-exit {
     opacity: 1;
-    transition: opacity 250ms ease-in;
+    z-index: 1;
+
+    &.fade-exit-active {
+      opacity: 0;
+      transition: opacity 300ms ease-in;
+    }
   }
 
+  .transform-enter {
+    transform: translateY(100%);
+    z-index: 1;
+
+    &.transform-enter-active {
+      transform: translateY(0%);
+      transition: transform 300ms ease-in;
+    }
+  }
+
+  .transform-exit {
+    transform: translateY(0%);
+    z-index: 1;
+
+    &.transform-exit-active {
+      transform: translateY(100%);
+      transition: transform 300ms ease-in;
+    }
+  }
 }

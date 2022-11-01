@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { cloneElement, FC, ReactElement, useCallback, useMemo } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -13,9 +13,39 @@ const blankScreens = ['/contact', '/play', '/services'];
 const App: FC = () => {
   const location = useLocation();
 
+  const cssTransitionClassNames = useMemo(() => {
+    if (location.pathname !== '/')
+      return {
+        exit: 'fade-exit',
+        exitActive: 'fade-exit-active',
+        enter: 'transform-enter',
+        enterActive: 'transform-enter-active',
+      };
+
+    return {
+      exit: 'transform-exit',
+      exitActive: 'transform-exit-active',
+      enter: 'fade-enter',
+      enterActive: 'fade-enter-active',
+    };
+  }, [location.pathname]);
+
+  const childFactory = useCallback(
+    (child: ReactElement) =>
+      cloneElement(child, {
+        classNames: cssTransitionClassNames,
+        timeout: 300,
+      }),
+    [cssTransitionClassNames],
+  );
+
   return (
-    <TransitionGroup className="app-wrapper">
-      <CSSTransition key={location.pathname} classNames="fade" timeout={300}>
+    <TransitionGroup className="app-wrapper" childFactory={childFactory}>
+      <CSSTransition
+        key={location.pathname}
+        classNames={cssTransitionClassNames}
+        timeout={300}
+      >
         <Routes location={location}>
           <Route path="/" element={<MainMenu />} />
           <Route path="/contact_form" element={<ContactForm />} />
