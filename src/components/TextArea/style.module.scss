@@ -9,10 +9,11 @@
     color: var(--tg-theme-text-color);
     font-family: Open-Sans, sans-serif;
     font-size: 14px;
-    padding: 18px 12px;
+    padding: 12px 12px;
     resize: none;
     width: 100%;
     box-sizing: border-box;
+    height: 40px;
   }
 
   &_error {
@@ -20,7 +21,7 @@
     font-family: Open-Sans, sans-serif;
     font-size: 10px;
     color: #f00;
-    top: 80px;
-    left: 12px;
+    top: 47px;
+    left: 13px;
   }
 }

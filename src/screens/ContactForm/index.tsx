@@ -8,7 +8,7 @@ import FileInput from '../../components/FileInput';
 import { useTgBackButton } from '../../utils/hooks/tgBackButton';
 import { useTgMainButton } from '../../utils/hooks/tgMainButton';
 
-import Textarea from '../../components/Textarea';
+import TextArea from '../../components/TextArea';
 import { WebApp } from '../../utils/tgWebApp';
 
 import './style.scss';
@@ -51,15 +51,15 @@ const ContactForm: FC = () => {
   const handleFormSubmit = handleSubmit(async (data) => {
     try {
       WebApp.MainButton.setParams({ is_active: false });
-      let text = `*Имя:* ${data.name}`;
+      let text = `<b>Имя:</b> ${data.name}`;
       if (data.organizationName)
-        text += `\n*Имя организации:* ${data.organizationName}`;
-      text += `\n*Email:* ${data.email}`;
-      text += `\n*Username:* ${data.username}`;
-      text += `\n*Описание проекта:* ${data.projectDescription}`;
+        text += `\n<b>Имя организации:</b> ${data.organizationName}`;
+      text += `\n<b>Email:</b> ${data.email}`;
+      text += `\n<b>Username:</b> @${data.username}`;
+      text += `\n<b>Описание проекта:</b> ${data.projectDescription}`;
       await sendMessage({
-        parse_mode: 'MarkdownV2',
-        text: encodeURI(text.replace(/\./g, '\\.')),
+        parse_mode: 'HTML',
+        text: encodeURI(text),
       });
 
       const file = data.fileAttachment.item(0);
@@ -128,7 +128,7 @@ const ContactForm: FC = () => {
       </div>
       <div className="contact-form_group">
         <div className="contact-form_title">Информация о проекте</div>
-        <Textarea
+        <TextArea
           placeholder="Краткое описание проекта"
           error={errors.projectDescription?.message}
           className="contact-form_textarea"
@@ -156,6 +156,7 @@ const ContactForm: FC = () => {
       {formError && (
         <div className="contact-form_error">Ошибка: {formError}</div>
       )}
+      <button>Submit</button>
     </form>
   );
 };

@@ -1,7 +1,7 @@
 import {
   ChangeEventHandler,
-  forwardRef,
   InputHTMLAttributes,
+  forwardRef,
   useState,
 } from 'react';
 import classNames from 'classnames';
@@ -24,8 +24,8 @@ const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
       const file = filesList.item(0);
       if (!file) return;
 
-      setFile(file);
       props.onChange && props.onChange(event);
+      setFile(file);
     };
 
     return (

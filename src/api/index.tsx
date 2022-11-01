@@ -24,8 +24,6 @@ const callMethod = async <T extends Record<string, unknown>>(
   }
 };
 
-export const getBotData = () => callMethod('getMe', {});
-
 export const sendMessage = (data: {
   text: string;
   parse_mode?: 'Markdown' | 'MarkdownV2' | 'HTML';
