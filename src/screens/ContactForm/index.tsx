@@ -112,6 +112,7 @@ const ContactForm: FC = () => {
         <TextInput
           error={errors.email?.message}
           className="contact-form_text-input"
+          autoCapitalize="none"
           placeholder="Email для связи"
           {...register('email', {
             required: 'Email обязательный параметр',
