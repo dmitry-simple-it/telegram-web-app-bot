@@ -6,7 +6,7 @@
   "scripts": {
     "start:bot": "ts-node bot/index.ts",
     "start:web": "webpack-dev-server -c webpack.config.js --mode development --open",
-    "build": "webpack -c webpack.config.js --mode production",
+    "build": "node scripts/create-env.js && webpack -c webpack.config.js --mode production",
     "prettier": "prettier -w .",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx -c .eslintrc"
   },
