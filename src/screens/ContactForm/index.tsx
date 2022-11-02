@@ -13,6 +13,9 @@ import { WebApp } from '../../utils/tgWebApp';
 
 import './style.scss';
 import { sendDocument, sendMessage } from '../../api';
+import { isMobileOrTablet } from '../../utils/isMobileOrTablet';
+
+console.log('Telegram: ', window.Telegram);
 
 const ContactForm: FC = () => {
   const [formError, setFormError] = useState('');
@@ -52,6 +55,7 @@ const ContactForm: FC = () => {
     try {
       WebApp.MainButton.showProgress(true);
       WebApp.MainButton.setParams({ is_active: false });
+
       let text = `<b>Имя:</b> ${data.name}`;
       if (data.organizationName)
         text += `\n<b>Имя организации:</b> ${data.organizationName}`;
@@ -65,6 +69,8 @@ const ContactForm: FC = () => {
 
       const file = data.fileAttachment.item(0);
       if (file) await sendDocument({ document: file });
+
+      WebApp.MainButton.setParams({ is_active: false });
       WebApp.MainButton.showProgress(false);
       WebApp.close();
     } catch (error) {
@@ -159,22 +165,24 @@ const ContactForm: FC = () => {
             required: 'Краткое описание проекта обязательно',
           })}
         />
-        <FileInput
-          error={errors.fileAttachment?.message}
-          className="contact-form_file-input"
-          {...register('fileAttachment', {
-            validate: (fileList) => {
-              if (!fileList.length) return;
+        {isMobileOrTablet && (
+          <FileInput
+            error={errors.fileAttachment?.message}
+            className="contact-form_file-input"
+            {...register('fileAttachment', {
+              validate: (fileList) => {
+                if (!fileList.length) return;
 
-              const file = fileList.item(0);
-              if (!file) return;
+                const file = fileList.item(0);
+                if (!file) return;
 
-              const fileSizeMB = file.size / (1024 * 1024);
-              if (fileSizeMB > 50)
-                return 'Размер файла не должен превышать 50 мегабайт';
-            },
-          })}
-        />
+                const fileSizeMB = file.size / (1024 * 1024);
+                if (fileSizeMB > 50)
+                  return 'Размер файла не должен превышать 50 мегабайт';
+              },
+            })}
+          />
+        )}
       </div>
       {formError && (
         <div className="contact-form_error">Ошибка: {formError}</div>
