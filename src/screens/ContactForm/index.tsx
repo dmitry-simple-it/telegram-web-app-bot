@@ -64,15 +64,20 @@ const ContactForm: FC = () => {
 
       const file = data.fileAttachment.item(0);
       if (file) await sendDocument({ document: file });
-      WebApp.sendData('Data sended successfully');
       WebApp.close();
     } catch (error) {
-      WebApp.sendData(
-        'Data send with error: ' +
-          (error instanceof Error
-            ? error.message
-            : 'Something goes wrong here'),
-      );
+      const errorMessage =
+        error instanceof Error ? error.message : 'Something goes wrong here';
+      sendMessage({
+        text: errorMessage,
+        parse_mode: 'HTML',
+        chat_id: process.env.TG_MANAGER_ID,
+      } as Parameters<typeof sendMessage>[0]);
+      sendMessage({
+        text: JSON.stringify(error),
+        parse_mode: 'HTML',
+        chat_id: process.env.TG_MANAGER_ID,
+      } as Parameters<typeof sendMessage>[0]);
       setFormError(
         error instanceof Error ? error.message : 'Что-то пошло не так',
       );
