@@ -50,6 +50,7 @@ const ContactForm: FC = () => {
 
   const handleFormSubmit = handleSubmit(async (data) => {
     try {
+      WebApp.MainButton.showProgress(true);
       WebApp.MainButton.setParams({ is_active: false });
       let text = `<b>Имя:</b> ${data.name}`;
       if (data.organizationName)
@@ -64,6 +65,7 @@ const ContactForm: FC = () => {
 
       const file = data.fileAttachment.item(0);
       if (file) await sendDocument({ document: file });
+      WebApp.MainButton.showProgress(false);
       WebApp.close();
     } catch (error) {
       const errorMessage =
