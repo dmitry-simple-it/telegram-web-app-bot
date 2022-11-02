@@ -1,10 +1,10 @@
 import { FC, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ReactLogo from '../../assets/react-logo.png';
 import { useTgMainButton } from '../../utils/hooks/tgMainButton';
 import { useTgBackButton } from '../../utils/hooks/tgBackButton';
 import { WebApp } from '../../utils/tgWebApp';
+import AnimatedReactLogo from '../../components/AnimatedReactLogo';
 
 import './style.scss';
 
@@ -22,11 +22,7 @@ const PlaceholderScreen: FC = () => {
 
   return (
     <div className="placeholder-screen">
-      <img
-        className="placeholder-screen_react-logo"
-        src={ReactLogo}
-        alt="react logo"
-      />
+      <AnimatedReactLogo />
     </div>
   );
 };

@@ -64,9 +64,15 @@ const ContactForm: FC = () => {
 
       const file = data.fileAttachment.item(0);
       if (file) await sendDocument({ document: file });
-
+      WebApp.sendData('Data sended successfully');
       WebApp.close();
     } catch (error) {
+      WebApp.sendData(
+        'Data send with error: ' +
+          (error instanceof Error
+            ? error.message
+            : 'Something goes wrong here'),
+      );
       setFormError(
         error instanceof Error ? error.message : 'Что-то пошло не так',
       );
@@ -91,6 +97,11 @@ const ContactForm: FC = () => {
 
   useEffect(() => {
     WebApp.expand();
+    WebApp.enableClosingConfirmation();
+
+    return () => {
+      WebApp.disableClosingConfirmation();
+    };
   }, []);
 
   return (

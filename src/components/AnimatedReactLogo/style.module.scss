@@ -1,0 +1,27 @@
+.react-logo {
+  width: 40%;
+  max-width: 250px;
+  animation: React-logo-spin 5s infinite linear;
+  cursor: pointer;
+  outline-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.particle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@keyframes React-logo-spin {
+  from {
+    transform: translateY(-65%) rotate(0deg);
+  }
+  to {
+    transform: translateY(-65%) rotate(360deg);
+  }
+}
