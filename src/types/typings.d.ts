@@ -2,8 +2,9 @@ declare module '*.png';
 declare module '*.jpg';
 declare module '*.jpeg';
 declare module '*.gif';
+declare module '*.svg';
 
-declare module '*.svg' {
+declare module '*.svg?react' {
   import { ReactSVGComponent } from './types';
   const svg: ReactSVGComponent;
   export = svg;

@@ -1,9 +1,72 @@
 :root {
-  --tg-theme-bg-color: #181819;
+  --tg-theme-bg-color: #272626;
   --tg-theme-text-color: #fff;
   --tg-theme-hint-color: #000;
   --tg-theme-link-color: #3cbcd5;
   --tg-theme-button-color: #3dbdd6;
   --tg-theme-button-text-color: #fff;
-  --tg-theme-secondary-bg-color: #272626;
+  --tg-theme-secondary-bg-color: #181819;
+}
+
+.screen {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: var(--tg-theme-secondary-bg-color);
+  box-sizing: border-box;
+  flex-direction: column;
+
+  &_group {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--tg-theme-bg-color);
+    margin-bottom: 12px;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+
+    &_title {
+      font-family: Open-Sans, sans-serif;
+      font-weight: bold;
+      font-size: 14px;
+      color: var(--tg-theme-link-color);
+      padding: 6px 12px 0;
+    }
+
+    &_file-input {
+      margin: 6px 12px;
+    }
+
+    &_text-input {
+      margin: 3px 0;
+
+      &:nth-child(2) {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &_textarea {
+      margin: 3px 0;
+
+      &:nth-child(2) {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &_error {
+    font-family: Open-Sans, sans-serif;
+    font-size: 16px;
+    margin: 10px 0;
+    text-align: center;
+    color: red;
+  }
 }

@@ -14,7 +14,7 @@
     box-sizing: border-box;
 
     &::placeholder {
-      color: rgb(128, 128, 128);
+      color: #808080;
     }
   }
 
@@ -23,7 +23,34 @@
     font-size: 10px;
     position: absolute;
     color: #f00;
-    top: 46px;
-    left: 12px;
+    top: 32.5px;
+    right: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100% - 24px);
+    transition: top 300ms ease;
+  }
+
+  &_label {
+    color: #808080;
+    font-size: 14px;
+    font-family: Open-Sans, sans-serif;
+    position: absolute;
+    transform: translate(12px, 18px);
+    left: 0;
+    top: 0;
+    cursor: text;
+    transition: transform 300ms ease, font-size 300ms ease;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: calc(100% - 24px);
+
+    &__floating {
+      transform: translate(12px, 32px);
+      font-size: 10px;
+      cursor: default;
+    }
   }
 }

@@ -8,7 +8,7 @@ import {
 } from 'react';
 import classNames from 'classnames';
 
-import ClipSvg from '../../assets/clip.svg';
+import ClipSvg from '../../assets/clip.svg?react';
 import classes from './style.module.scss';
 import LoadingIndicator from '../LoadingIndicator';
 import { WebApp } from '../../utils/tgWebApp';

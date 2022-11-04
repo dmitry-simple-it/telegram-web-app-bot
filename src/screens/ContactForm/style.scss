@@ -1,20 +1,9 @@
 .contact-form {
-  display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  background-color: var(--tg-theme-secondary-bg-color);
   padding: 0 0 10px;
-  box-sizing: border-box;
   max-width: 800px;
 
-  &_group {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--tg-theme-bg-color);
-    margin-bottom: 12px;
-    padding: 12px;
-
+  & .screen_group {
     &:first-child {
       margin-top: 4px;
     }
@@ -22,33 +11,5 @@
     &:last-child {
       margin-bottom: 0;
     }
-  }
-
-  &_title {
-    font-family: Open-Sans, sans-serif;
-    font-weight: bold;
-    font-size: 14px;
-    color: var(--tg-theme-link-color);
-    padding: 6px 12px;
-  }
-
-  &_file-input {
-    margin: 12px;
-  }
-
-  &_text-input {
-    margin: 6px 0;
-  }
-
-  &_textarea {
-    margin: 6px 0;
-  }
-
-  &_error {
-    font-family: Open-Sans, sans-serif;
-    font-size: 16px;
-    margin: 10px 0;
-    text-align: center;
-    color: red;
   }
 }

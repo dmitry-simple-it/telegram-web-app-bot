@@ -1,0 +1,33 @@
+.text-link {
+  position: relative;
+  width: 100%;
+
+  &_link-wrapper {
+    display: flex;
+
+    &_text {
+      background-color: transparent;
+      color: var(--tg-theme-text-color);
+      padding: 12px 12px;
+      font-family: Open-Sans, sans-serif;
+      font-size: 14px;
+      box-sizing: border-box;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+  &_label {
+    position: absolute;
+    color: #808080;
+    font-size: 10px;
+    font-family: Open-Sans, sans-serif;
+    left: 12px;
+    top: 32px;
+    cursor: text;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: calc(100% - 24px);
+  }
+}

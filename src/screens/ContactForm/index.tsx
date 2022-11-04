@@ -15,8 +15,6 @@ import './style.scss';
 import { sendDocument, sendMessage } from '../../api';
 import { isMobileOrTablet } from '../../utils/isMobileOrTablet';
 
-console.log('Telegram: ', window.Telegram);
-
 const ContactForm: FC = () => {
   const [formError, setFormError] = useState('');
 
@@ -118,26 +116,26 @@ const ContactForm: FC = () => {
   }, []);
 
   return (
-    <form className="contact-form" onSubmit={handleFormSubmit}>
-      <div className="contact-form_group">
-        <div className="contact-form_title">Информация о вас</div>
+    <form className="screen contact-form" onSubmit={handleFormSubmit}>
+      <div className="screen_group">
+        <div className="screen_group_title">Информация о вас</div>
         <TextInput
           error={errors.name?.message}
-          className="contact-form_text-input"
-          placeholder="Ваше имя"
+          className="screen_group_text-input"
+          label="Ваше имя"
           {...register('name', { required: 'Имя обязательный параметр' })}
         />
         <TextInput
           error={errors.organizationName?.message}
-          className="contact-form_text-input"
-          placeholder="Название организации (необязательно)"
+          className="screen_group_text-input"
+          label="Название организации (необязательно)"
           {...register('organizationName')}
         />
         <TextInput
           error={errors.email?.message}
-          className="contact-form_text-input"
+          className="screen_group_text-input"
           autoCapitalize="none"
-          placeholder="Email для связи"
+          label="Email для связи"
           {...register('email', {
             required: 'Email обязательный параметр',
             validate: (value) => {
@@ -148,19 +146,19 @@ const ContactForm: FC = () => {
         />
         <TextInput
           error={errors.username?.message}
-          className="contact-form_text-input"
-          placeholder="Ник в телеграмм"
+          className="screen_group_text-input"
+          label="Ник в телеграмм"
           {...register('username', {
             required: 'Имя пользователя обязательный параметр',
           })}
         />
       </div>
-      <div className="contact-form_group">
-        <div className="contact-form_title">Информация о проекте</div>
+      <div className="screen_group">
+        <div className="screen_group_title">Информация о проекте</div>
         <TextArea
-          placeholder="Краткое описание проекта"
+          label="Краткое описание проекта"
           error={errors.projectDescription?.message}
-          className="contact-form_textarea"
+          className="screen_group_textarea"
           {...register('projectDescription', {
             required: 'Краткое описание проекта обязательно',
           })}
@@ -168,7 +166,7 @@ const ContactForm: FC = () => {
         {isMobileOrTablet && (
           <FileInput
             error={errors.fileAttachment?.message}
-            className="contact-form_file-input"
+            className="screen_group_file-input"
             {...register('fileAttachment', {
               validate: (fileList) => {
                 if (!fileList.length) return;
@@ -184,9 +182,7 @@ const ContactForm: FC = () => {
           />
         )}
       </div>
-      {formError && (
-        <div className="contact-form_error">Ошибка: {formError}</div>
-      )}
+      {formError && <div className="screen_error">Ошибка: {formError}</div>}
     </form>
   );
 };

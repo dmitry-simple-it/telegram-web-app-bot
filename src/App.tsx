@@ -5,10 +5,11 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import MainMenu from './screens/MainMenu';
 import ContactForm from './screens/ContactForm';
 import PlaceholderScreen from './screens/PlaceholderScreen';
+import Contacts from './screens/Contacts';
 
 import './style.scss';
 
-const blankScreens = ['/contact', '/play', '/services'];
+const blankScreens = ['/play', '/services'];
 
 const App: FC = () => {
   const location = useLocation();
@@ -49,6 +50,7 @@ const App: FC = () => {
         <Routes location={location}>
           <Route path="/" element={<MainMenu />} />
           <Route path="/contact_form" element={<ContactForm />} />
+          <Route path="/contact" element={<Contacts />} />
           {blankScreens.map((screen) => (
             <Route key={screen} path={screen} element={<PlaceholderScreen />} />
           ))}

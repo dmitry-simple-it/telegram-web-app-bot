@@ -1,6 +1,6 @@
 import { FC, MouseEventHandler } from 'react';
 
-import ReactLogoSvg from '../../assets/react-logo.svg';
+import ReactLogoSvg from '../../assets/react-logo.svg?react';
 import classes from './style.module.scss';
 import { WebApp } from '../../utils/tgWebApp';
 import { animateParticles } from './utils';

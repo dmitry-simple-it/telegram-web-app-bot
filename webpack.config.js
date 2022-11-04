@@ -102,7 +102,15 @@ module.exports = {
       },
       {
         test: /\.svg$/i,
-        use: '@svgr/webpack',
+        oneOf: [
+          {
+            resourceQuery: /react/,
+            use: { loader: '@svgr/webpack', options: { ref: true } },
+          },
+          {
+            type: 'asset/resource',
+          },
+        ],
       },
     ],
   },

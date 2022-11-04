@@ -1,7 +1,7 @@
-import PaperPlane from '../../assets/paper-plane.svg';
-import PhoneCall from '../../assets/phone-call.svg';
-import Play from '../../assets/play.svg';
-import Briefcase from '../../assets/briefcase.svg';
+import PaperPlane from '../../assets/paper-plane.svg?react';
+import PhoneCall from '../../assets/phone-call.svg?react';
+import Play from '../../assets/play.svg?react';
+import Briefcase from '../../assets/briefcase.svg?react';
 
 import { ReactSVGComponent } from '../../types/types';
 

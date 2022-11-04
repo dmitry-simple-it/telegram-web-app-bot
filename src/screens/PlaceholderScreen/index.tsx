@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useTgMainButton } from '../../utils/hooks/tgMainButton';

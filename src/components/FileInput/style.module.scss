@@ -36,6 +36,11 @@
     font-family: Open-Sans, sans-serif;
     font-size: 10px;
     color: #f00;
-    top: 43px;
+    top: 42px;
+    right: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 }

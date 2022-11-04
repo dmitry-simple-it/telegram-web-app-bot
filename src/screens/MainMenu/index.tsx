@@ -10,7 +10,7 @@ const MainMenu: FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="main-menu">
+    <div className="screen main-menu">
       {menuItems.map((item, index) => (
         <MenuItem
           Icon={item.icon}
