@@ -3,6 +3,14 @@
 
   &_logo-image {
     padding: 8px 8px;
+
+    & .SimpleIT-logo_svg__fil0 {
+      fill: var(--tg-theme-text-color);
+    }
+
+    & .SimpleIT-logo_svg__fil1 {
+      fill: var(--tg-theme-link-color);
+    }
   }
 
   & .screen_group {
