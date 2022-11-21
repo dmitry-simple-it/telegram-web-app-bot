@@ -1,0 +1,23 @@
+.list-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &_item {
+    display: flex;
+    align-items: center;
+    margin: 14px 0;
+    cursor: pointer;
+
+    &_img {
+      width: 24px;
+      height: 24px;
+    }
+
+    &_text {
+      font-family: Open-Sans, sans-serif;
+      font-size: 14px;
+      color: var(--tg-theme-text-color);
+    }
+  }
+}

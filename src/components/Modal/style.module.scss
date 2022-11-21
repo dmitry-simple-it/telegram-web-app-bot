@@ -1,0 +1,18 @@
+.modal {
+  &_overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(30, 30, 30, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &_wrapper {
+    background-color: var(--tg-theme-secondary-bg-color);
+    padding: 12px 20px;
+  }
+}

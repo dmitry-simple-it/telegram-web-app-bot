@@ -25,6 +25,12 @@
     width: 100%;
     box-sizing: border-box;
 
+    &_text {
+      font-family: Open-Sans, sans-serif;
+      font-size: 16px;
+      color: var(--tg-theme-text-color);
+    }
+
     &_title {
       font-family: Open-Sans, sans-serif;
       font-weight: bold;
