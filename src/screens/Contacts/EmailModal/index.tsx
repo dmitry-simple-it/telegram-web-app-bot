@@ -12,7 +12,7 @@ const list: Array<ListMenuItem> = [
   {
     text: 'Отправить письмо',
     onClick: () => {
-      window.open('mailto:hello@simple-it.pro');
+      window.open(`${process.env.SITE_URL}/email.html`, '_blank');
     },
   },
   {

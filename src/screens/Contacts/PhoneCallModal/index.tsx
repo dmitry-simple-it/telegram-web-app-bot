@@ -25,7 +25,7 @@ const list: Array<ListMenuItem> = [
   {
     text: 'Позвонить',
     onClick: () => {
-      window.open('tel:+79507792400', '_blank');
+      window.open(`${process.env.SITE_URL}/phone.html`, '_blank');
     },
   },
   {
