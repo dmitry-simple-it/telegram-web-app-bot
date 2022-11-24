@@ -1,4 +1,4 @@
-import React, { FC, MouseEventHandler, useCallback } from 'react';
+import React, { FC, MouseEventHandler, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import SimpleITLogo from '../../assets/SimpleIT-logo.svg?react';
@@ -7,9 +7,13 @@ import { useTgBackButton } from '../../utils/hooks/tgBackButton';
 import { useTgMainButton } from '../../utils/hooks/tgMainButton';
 import PhoneCallModal from './PhoneCallModal';
 import { useSwitch } from '../../utils/hooks/switch';
+import EmailModal from './EmailModal';
+import customToast from '../../components/CustomToast';
+import { WebApp } from '../../utils/tgWebApp';
 
 import './style.scss';
-import EmailModal from './EmailModal';
+
+const usernameToastID = 'usernameToastID';
 
 const Contacts: FC = () => {
   const [isPhoneModalOpen, openPhoneModal, closePhoneModal] = useSwitch();
@@ -23,15 +27,23 @@ const Contacts: FC = () => {
     [],
   );
 
-  const handleUsernameClick: MouseEventHandler = (event) => {
+  const handleUsernameClick: MouseEventHandler = async (event) => {
     const target = event.target as HTMLAnchorElement;
-    navigator.clipboard.writeText(target.text);
+    await navigator.clipboard.writeText(target.text);
+    customToast({
+      text: 'Имя пользователя скопировано',
+      toastId: usernameToastID,
+    });
   };
 
   useTgBackButton(handleNavigateBack);
   useTgMainButton({
     text: 'Оставить заявку',
     onClick: handleNavigateToContactForm,
+  });
+
+  useEffect(() => {
+    WebApp.expand();
   });
 
   return (
@@ -43,7 +55,6 @@ const Contacts: FC = () => {
           text="+7 (499) 113-76-31"
           label="Телефон"
           onClick={openPhoneModal}
-          // href="tel:+74991137631"
         />
         <TextLink
           className="screen_group_text-input"
@@ -56,7 +67,6 @@ const Contacts: FC = () => {
           text="hello@simple-it.pro"
           label="E-mail"
           onClick={openEmailModal}
-          // href="mailto:hello@simple-it.pro"
         />
         <TextLink
           className="screen_group_text-input"

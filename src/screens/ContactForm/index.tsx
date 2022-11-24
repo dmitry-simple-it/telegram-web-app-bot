@@ -4,16 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 import TextInput from '../../components/TextInput';
 import FileInput from '../../components/FileInput';
-
 import { useTgBackButton } from '../../utils/hooks/tgBackButton';
 import { useTgMainButton } from '../../utils/hooks/tgMainButton';
-
 import TextArea from '../../components/TextArea';
 import { WebApp } from '../../utils/tgWebApp';
-
-import './style.scss';
 import { sendDocument, sendMessage } from '../../api';
 import { isMobileOrTablet } from '../../utils/isMobileOrTablet';
+
+import './style.scss';
 
 const ContactForm: FC = () => {
   const [formError, setFormError] = useState('');

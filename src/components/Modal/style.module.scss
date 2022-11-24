@@ -9,6 +9,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    transition: opacity 300ms ease;
+
+    &__visible {
+      opacity: 1;
+    }
   }
 
   &_wrapper {

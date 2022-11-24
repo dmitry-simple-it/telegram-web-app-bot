@@ -1,30 +1,18 @@
 import { FC } from 'react';
+
 import ListMenu from '../../../components/ListMenu';
 import Modal from '../../../components/Modal';
-import { ListMenuItem } from '../../../components/ListMenu/types';
+import { emailModalList } from './const';
 
 type EmailModalProps = {
   open: boolean;
   onClose: () => void;
 };
 
-const list: Array<ListMenuItem> = [
-  {
-    text: 'Отправить письмо',
-    onClick: () => {
-      window.open(`${process.env.SITE_URL}/email.html`, '_blank');
-    },
-  },
-  {
-    text: 'Копировать',
-    onClick: () => navigator.clipboard.writeText('hello@simple-it.pro'),
-  },
-];
-
 const EmailModal: FC<EmailModalProps> = ({ open, onClose }) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <ListMenu items={list} />
+      <ListMenu items={emailModalList} />
     </Modal>
   );
 };

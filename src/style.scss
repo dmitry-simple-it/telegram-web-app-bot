@@ -25,22 +25,62 @@
     }
   }
 
-  .transform-enter {
+  .transform-vertical-enter {
     transform: translateY(100%);
     z-index: 1;
 
-    &.transform-enter-active {
+    &.transform-vertical-enter-active {
       transform: translateY(0%);
       transition: transform 300ms ease-in;
     }
   }
 
-  .transform-exit {
+  .transform-vertical-exit {
     transform: translateY(0%);
     z-index: 1;
 
-    &.transform-exit-active {
+    &.transform-vertical-exit-active {
       transform: translateY(100%);
+      transition: transform 300ms ease-in;
+    }
+  }
+
+  .transform-right-enter {
+    transform: translateX(100%);
+    z-index: 1;
+
+    &.transform-right-enter-active {
+      transform: translateX(0);
+      transition: transform 300ms ease-in;
+    }
+  }
+
+  .transform-right-exit {
+    transform: translateX(0%);
+    z-index: 1;
+
+    &.transform-right-exit-active {
+      transform: translateX(100%);
+      transition: transform 300ms ease-in;
+    }
+  }
+
+  .transform-left-enter {
+    transform: translateX(-100%);
+    z-index: 1;
+
+    &.transform-left-enter-active {
+      transform: translateX(0);
+      transition: 300ms ease-in;
+    }
+  }
+
+  .transform-left-exit {
+    transform: translateX(0);
+    z-index: 1;
+
+    &.transform-left-exit-active {
+      transform: translateX(-100%);
       transition: transform 300ms ease-in;
     }
   }

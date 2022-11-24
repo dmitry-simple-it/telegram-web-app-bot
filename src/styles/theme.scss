@@ -15,6 +15,7 @@
   background-color: var(--tg-theme-secondary-bg-color);
   box-sizing: border-box;
   flex-direction: column;
+  position: absolute;
 
   &_group {
     display: flex;

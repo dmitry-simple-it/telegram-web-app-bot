@@ -9,9 +9,10 @@
     margin: 14px 0;
     cursor: pointer;
 
-    &_img {
-      width: 24px;
-      height: 24px;
+    & svg, & img, &_img {
+      width: 20px;
+      height: 20px;
+      margin-right: 6px;
     }
 
     &_text {

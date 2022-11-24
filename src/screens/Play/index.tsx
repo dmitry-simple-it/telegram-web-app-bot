@@ -8,7 +8,7 @@ import AnimatedReactLogo from '../../components/AnimatedReactLogo';
 
 import './style.scss';
 
-const PlaceholderScreen: FC = () => {
+const Play: FC = () => {
   const navigate = useNavigate();
 
   const navigateBack = useCallback(() => navigate(-1), [navigate]);
@@ -27,4 +27,4 @@ const PlaceholderScreen: FC = () => {
   );
 };
 
-export default PlaceholderScreen;
+export default Play;

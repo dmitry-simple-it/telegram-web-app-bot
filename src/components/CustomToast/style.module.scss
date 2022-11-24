@@ -1,0 +1,25 @@
+:global(#root) .toast {
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+  font-size: 14px;
+  min-height: 36px;
+  padding: 4px;
+  border-radius: 10px;
+  margin: 16px;
+
+  &__body {
+    margin: 0;
+    padding: 4px 10px;
+    align-items: center;
+
+    & > div {
+      display: flex;
+      align-items: center;
+    }
+
+    &__icon {
+      max-width: 27px;
+      margin-right: 10px;
+    }
+  }
+}
