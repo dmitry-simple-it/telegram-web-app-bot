@@ -45,9 +45,7 @@ const ContactForm: FC = () => {
     defaultValues: initialFormData,
   });
 
-  const navigateBack = useCallback(() => {
-    navigate(-1);
-  }, [navigate]);
+  const handleBackClick = useCallback(() => navigate(-1), [navigate]);
 
   const handleFormSubmit = handleSubmit(async (data) => {
     try {
@@ -158,13 +156,13 @@ const ContactForm: FC = () => {
         )}
       </div>
       {formError && <div className="screen_error">Ошибка: {formError}</div>}
+      <TgBackButton onClick={handleBackClick} />
       <TgMainButton
         onClick={handleFormSubmit}
         text="Отправить"
         active={!isSubmitting}
         progress={isSubmitting}
       />
-      <TgBackButton onClick={navigateBack} />
     </form>
   );
 };

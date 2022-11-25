@@ -10,21 +10,15 @@ import {
   Routes,
   Route,
   useLocation,
-  Navigate,
   useNavigationType,
 } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { ToastContainer } from 'react-toastify';
-
-import MainMenu from './screens/MainMenu';
-import ContactForm from './screens/ContactForm';
-import Contacts from './screens/Contacts';
-import Play from './screens/Play';
+import { routes } from './routes';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './style.scss';
 
-const blankScreens = ['/play', '/services'];
 const fadingLocations = ['/'];
 
 const App: FC = () => {
@@ -106,13 +100,13 @@ const App: FC = () => {
           timeout={300}
         >
           <Routes location={location}>
-            <Route path="/" element={<MainMenu />} />
-            <Route path="/contact_form" element={<ContactForm />} />
-            <Route path="/contact" element={<Contacts />} />
-            {blankScreens.map((screen) => (
-              <Route key={screen} path={screen} element={<Play />} />
+            {routes.map((route) => (
+              <Route
+                path={route.path}
+                element={route.element}
+                key={route.path}
+              />
             ))}
-            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </CSSTransition>
       </TransitionGroup>

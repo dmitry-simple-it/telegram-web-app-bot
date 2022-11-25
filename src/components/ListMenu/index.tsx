@@ -13,8 +13,6 @@ const ListMenu: FC<ListMenuProps> = ({ items }) => {
     return items.some((item) => item.icon);
   }, [items]);
 
-  console.log('isWithImages: ', isWithImages);
-
   return (
     <ul className={classes.listMenu}>
       {items.map(({ ...item }, index) => (

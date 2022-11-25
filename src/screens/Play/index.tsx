@@ -13,7 +13,7 @@ import './style.scss';
 const Play: FC = () => {
   const navigate = useNavigate();
 
-  const navigateBack = useCallback(() => navigate(-1), [navigate]);
+  const handleBackClick = useCallback(() => navigate(-1), [navigate]);
 
   useEffect(() => {
     tgWebApp.expand();
@@ -22,8 +22,11 @@ const Play: FC = () => {
   return (
     <div className="placeholder-screen">
       <AnimatedReactLogo />
-      <TgBackButton onClick={navigateBack} />
-      <TgMainButton onClick={navigateBack} text="Вернуться в основное меню" />
+      <TgBackButton onClick={handleBackClick} />
+      <TgMainButton
+        onClick={handleBackClick}
+        text="Вернуться в основное меню"
+      />
     </div>
   );
 };

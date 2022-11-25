@@ -1,7 +1,9 @@
-import { FC, useEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { tgWebApp } from '../../core/tgWebApp';
 import { themeParams } from '../../themeParams';
+import { TgContext } from '../../context';
 
 type MainButtonProps = {
   onClick: () => void;
@@ -20,20 +22,20 @@ const TgMainButton: FC<MainButtonProps> = ({
   progress = false,
   active = true,
 }) => {
+  const { addMainButton, removeMainButton } = useContext(TgContext);
+
   useEffect(() => {
-    tgWebApp.MainButton.show();
+    const id = uuidv4();
+    addMainButton(id);
 
     return () => {
-      tgWebApp.MainButton.hide();
+      removeMainButton(id);
     };
-  }, []);
+  }, [addMainButton, removeMainButton]);
 
   useEffect(() => {
     if (progress) tgWebApp.MainButton.showProgress();
-
-    return () => {
-      if (tgWebApp.MainButton.isVisible) tgWebApp.MainButton.hideProgress();
-    };
+    else tgWebApp.MainButton.hideProgress();
   }, [progress]);
 
   useEffect(() => {
@@ -43,14 +45,6 @@ const TgMainButton: FC<MainButtonProps> = ({
       text,
       color,
     });
-
-    return () => {
-      tgWebApp.MainButton.setParams({
-        is_active: true,
-        text_color: themeParams.buttonTextColor,
-        color: themeParams.buttonColor,
-      });
-    };
   }, [active, textColor, color, text]);
 
   useEffect(() => {

@@ -20,7 +20,7 @@ export const menuItems: Array<MenuItemType> = [
   {
     icon: PhoneCall,
     label: 'Связаться',
-    route: '/contact',
+    route: '/contacts',
   },
   {
     icon: Play,

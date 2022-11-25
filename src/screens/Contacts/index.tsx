@@ -1,5 +1,5 @@
 import React, { FC, MouseEventHandler, useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import SimpleITLogo from '../../assets/SimpleIT-logo.svg?react';
 import TextLink from '../../components/TextLink';
@@ -23,7 +23,7 @@ const Contacts: FC = () => {
 
   const navigate = useNavigate();
 
-  const handleNavigateBack = useCallback(() => navigate(-1), []);
+  const handleBackClick = useCallback(() => navigate(-1), []);
   const handleNavigateToContactForm = useCallback(
     () => navigate('/contact_form'),
     [],
@@ -74,11 +74,12 @@ const Contacts: FC = () => {
         <PhoneCallModal open={isPhoneModalOpen} onClose={closePhoneModal} />
         <EmailModal open={isEmailModalOpen} onClose={closeEmailModal} />
       </div>
-      <TgBackButton onClick={handleNavigateBack} />
+      <TgBackButton onClick={handleBackClick} />
       <TgMainButton
         onClick={handleNavigateToContactForm}
         text="Оставить заявку"
       />
+      <Link to={'/contact_form'}>Link</Link>
     </div>
   );
 };

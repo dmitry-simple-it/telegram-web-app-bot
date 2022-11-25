@@ -1,17 +1,21 @@
-import { FC, useEffect } from 'react';
+import { FC, useContext, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { tgWebApp } from '../../core/tgWebApp';
+import { TgContext } from '../../context';
 
 type TelegramBackButtonProps = {
   onClick: () => void;
 };
 
 const TgBackButton: FC<TelegramBackButtonProps> = ({ onClick }) => {
-  useEffect(() => {
-    tgWebApp.BackButton.show();
+  const { addBackButton, removeBackButton } = useContext(TgContext);
 
-    return () => tgWebApp.BackButton.hide();
-  }, []);
+  useEffect(() => {
+    const id = uuidv4();
+    addBackButton(id);
+    return () => removeBackButton(id);
+  }, [addBackButton, removeBackButton]);
 
   useEffect(() => {
     tgWebApp.BackButton.onClick(onClick);
