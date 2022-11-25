@@ -60,8 +60,10 @@ const ContactForm: FC = () => {
         text: encodeURI(text),
       });
 
-      const file = data.fileAttachment.item(0);
-      if (file) await sendDocument({ document: file });
+      if (data.fileAttachment) {
+        const file = data.fileAttachment.item(0);
+        if (file) await sendDocument({ document: file });
+      }
 
       tgWebApp.close();
     } catch (error) {
