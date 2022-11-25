@@ -2,7 +2,7 @@ import { ListMenuItem } from '../../../components/ListMenu/types';
 import customToast from '../../../components/CustomToast';
 import CopyIcon from '../../../assets/copy.svg?react';
 import EnvelopeIcon from '../../../assets/envelope.svg?react';
-import { tgWebApp, themeParams } from '../../../components/Telegram';
+import { themeParams } from '../../../components/Telegram';
 
 const emailToastID = 'emailToastID';
 
@@ -11,7 +11,7 @@ export const emailModalList: Array<ListMenuItem> = [
     text: 'Отправить письмо',
     icon: (props) => <EnvelopeIcon {...props} fill={themeParams.linkColor} />,
     onClick: () => {
-      tgWebApp.openLink(`${process.env.SITE_URL}/email.html`);
+      window.open(`${process.env.SITE_URL}/email.html`, '_blank');
     },
   },
   {
