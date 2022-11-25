@@ -1,10 +1,12 @@
 import React, { FC, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useTgMainButton } from '../../utils/hooks/tgMainButton';
-import { useTgBackButton } from '../../utils/hooks/tgBackButton';
-import { WebApp } from '../../utils/tgWebApp';
 import AnimatedReactLogo from '../../components/AnimatedReactLogo';
+import {
+  TgBackButton,
+  TgMainButton,
+  tgWebApp,
+} from '../../components/Telegram';
 
 import './style.scss';
 
@@ -13,16 +15,15 @@ const Play: FC = () => {
 
   const navigateBack = useCallback(() => navigate(-1), [navigate]);
 
-  useTgBackButton(navigateBack);
-  useTgMainButton({ text: 'Вернуться в основное меню', onClick: navigateBack });
-
   useEffect(() => {
-    WebApp.expand();
+    tgWebApp.expand();
   }, []);
 
   return (
     <div className="placeholder-screen">
       <AnimatedReactLogo />
+      <TgBackButton onClick={navigateBack} />
+      <TgMainButton onClick={navigateBack} text="Вернуться в основное меню" />
     </div>
   );
 };

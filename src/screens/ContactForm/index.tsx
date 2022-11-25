@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 import TextInput from '../../components/TextInput';
 import FileInput from '../../components/FileInput';
-import { useTgBackButton } from '../../utils/hooks/tgBackButton';
-import { useTgMainButton } from '../../utils/hooks/tgMainButton';
 import TextArea from '../../components/TextArea';
-import { WebApp } from '../../utils/tgWebApp';
 import { sendDocument, sendMessage } from '../../api';
 import { isMobileOrTablet } from '../../utils/isMobileOrTablet';
+import {
+  TgBackButton,
+  TgMainButton,
+  tgWebApp,
+} from '../../components/Telegram';
 
 import './style.scss';
 
@@ -19,7 +21,7 @@ const ContactForm: FC = () => {
   const navigate = useNavigate();
 
   const initialFormData = useMemo(() => {
-    const user = WebApp.initDataUnsafe.user;
+    const user = tgWebApp.initDataUnsafe.user;
     if (!user) return {};
 
     return {
@@ -31,7 +33,7 @@ const ContactForm: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<{
     name: string;
     organizationName: string;
@@ -49,9 +51,6 @@ const ContactForm: FC = () => {
 
   const handleFormSubmit = handleSubmit(async (data) => {
     try {
-      WebApp.MainButton.showProgress(true);
-      WebApp.MainButton.setParams({ is_active: false });
-
       let text = `<b>Имя:</b> ${data.name}`;
       if (data.organizationName)
         text += `\n<b>Имя организации:</b> ${data.organizationName}`;
@@ -66,34 +65,12 @@ const ContactForm: FC = () => {
       const file = data.fileAttachment.item(0);
       if (file) await sendDocument({ document: file });
 
-      WebApp.MainButton.setParams({ is_active: false });
-      WebApp.MainButton.showProgress(false);
-      WebApp.close();
+      tgWebApp.close();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Something goes wrong here';
-      sendMessage({
-        text: errorMessage,
-        parse_mode: 'HTML',
-        chat_id: process.env.TG_MANAGER_ID,
-      } as Parameters<typeof sendMessage>[0]);
-      sendMessage({
-        text: JSON.stringify(error),
-        parse_mode: 'HTML',
-        chat_id: process.env.TG_MANAGER_ID,
-      } as Parameters<typeof sendMessage>[0]);
       setFormError(
         error instanceof Error ? error.message : 'Что-то пошло не так',
       );
-    } finally {
-      WebApp.MainButton.setParams({ is_active: true });
     }
-  });
-
-  useTgBackButton(navigateBack);
-  useTgMainButton({
-    onClick: handleFormSubmit,
-    text: 'Отправить',
   });
 
   useEffect(() => {
@@ -105,11 +82,11 @@ const ContactForm: FC = () => {
   }, [formError]);
 
   useEffect(() => {
-    WebApp.expand();
-    WebApp.enableClosingConfirmation();
+    tgWebApp.expand();
+    tgWebApp.enableClosingConfirmation();
 
     return () => {
-      WebApp.disableClosingConfirmation();
+      tgWebApp.disableClosingConfirmation();
     };
   }, []);
 
@@ -181,6 +158,13 @@ const ContactForm: FC = () => {
         )}
       </div>
       {formError && <div className="screen_error">Ошибка: {formError}</div>}
+      <TgMainButton
+        onClick={handleFormSubmit}
+        text="Отправить"
+        active={!isSubmitting}
+        progress={isSubmitting}
+      />
+      <TgBackButton onClick={navigateBack} />
     </form>
   );
 };

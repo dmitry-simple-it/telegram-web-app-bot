@@ -1,8 +1,9 @@
-import { WebApp } from '../utils/tgWebApp';
+import { tgWebApp } from '../components/Telegram';
 
 const url = `https://api.telegram.org/bot${process.env.TG_BOT_TOKEN}`;
 
-const tgManagerId = WebApp.initDataUnsafe.user?.id || process.env.TG_MANAGER_ID;
+const tgManagerId =
+  tgWebApp.initDataUnsafe.user?.id || process.env.TG_MANAGER_ID;
 
 const callMethod = async <T extends Record<string, unknown>>(
   method: string,

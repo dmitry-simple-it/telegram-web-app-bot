@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import ClipSvg from '../../assets/clip.svg?react';
 import classes from './style.module.scss';
 import LoadingIndicator from '../LoadingIndicator';
-import { WebApp } from '../../utils/tgWebApp';
+import { themeParams } from '../Telegram';
 
 type FileInputProps = {
   error?: string;
@@ -64,14 +64,14 @@ const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
         />
         <ClipSvg
           className={classes.fileInput_clip}
-          fill={WebApp.themeParams.link_color || '#33bcd7'}
+          fill={themeParams.linkColor}
         />
         {loading && (
           <div className={classes.fileInput_spinnerWrapper}>
             <LoadingIndicator
               size={16}
               strokeWidth={2}
-              color={WebApp.themeParams.link_color}
+              color={themeParams.linkColor}
             />
           </div>
         )}

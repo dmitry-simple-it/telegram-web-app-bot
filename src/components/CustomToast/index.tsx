@@ -2,7 +2,7 @@ import { toast, Slide, ToastOptions } from 'react-toastify';
 import classNames from 'classnames';
 
 import CopyIcon from '../../assets/copy.svg?react';
-import { themeParams } from '../../utils/theme';
+import { themeParams } from '../Telegram';
 import classes from './style.module.scss';
 import { ReactSVGComponent } from '../../types/types';
 
@@ -37,7 +37,6 @@ const customToast = ({
       closeOnClick: false,
       closeButton: false,
       autoClose: 1000,
-      progress: 1,
       transition: Slide,
       ...options,
     },

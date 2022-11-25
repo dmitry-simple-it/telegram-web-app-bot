@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 
 import SimpleITLogo from '../../assets/SimpleIT-logo.svg?react';
 import TextLink from '../../components/TextLink';
-import { useTgBackButton } from '../../utils/hooks/tgBackButton';
-import { useTgMainButton } from '../../utils/hooks/tgMainButton';
 import PhoneCallModal from './PhoneCallModal';
 import { useSwitch } from '../../utils/hooks/switch';
 import EmailModal from './EmailModal';
 import customToast from '../../components/CustomToast';
-import { WebApp } from '../../utils/tgWebApp';
+import {
+  TgBackButton,
+  TgMainButton,
+  tgWebApp,
+} from '../../components/Telegram';
 
 import './style.scss';
 
@@ -36,15 +38,9 @@ const Contacts: FC = () => {
     });
   };
 
-  useTgBackButton(handleNavigateBack);
-  useTgMainButton({
-    text: 'Оставить заявку',
-    onClick: handleNavigateToContactForm,
-  });
-
   useEffect(() => {
-    WebApp.expand();
-  });
+    tgWebApp.expand();
+  }, []);
 
   return (
     <div className="screen contacts">
@@ -78,6 +74,11 @@ const Contacts: FC = () => {
         <PhoneCallModal open={isPhoneModalOpen} onClose={closePhoneModal} />
         <EmailModal open={isEmailModalOpen} onClose={closeEmailModal} />
       </div>
+      <TgBackButton onClick={handleNavigateBack} />
+      <TgMainButton
+        onClick={handleNavigateToContactForm}
+        text="Оставить заявку"
+      />
     </div>
   );
 };

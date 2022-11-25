@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { ReactSVGComponent } from '../../../types/types';
-import { WebApp } from '../../../utils/tgWebApp';
+import { themeParams } from '../../../components/Telegram';
 
 type MenuItemProps = {
   Icon: string | ReactSVGComponent;
@@ -14,10 +14,7 @@ const MenuItem: FC<MenuItemProps> = ({ Icon, label, onClick }) => (
     {typeof Icon === 'string' ? (
       <img className="main-menu_item_image" src={Icon} alt={label} />
     ) : (
-      <Icon
-        className="main-menu_item_image"
-        fill={WebApp.themeParams.link_color || '#33bcd7'}
-      />
+      <Icon className="main-menu_item_image" fill={themeParams.linkColor} />
     )}
     <div className="main-menu_item_text">{label}</div>
   </div>

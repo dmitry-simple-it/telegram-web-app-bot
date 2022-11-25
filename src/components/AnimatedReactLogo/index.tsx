@@ -2,22 +2,18 @@ import { FC, MouseEventHandler } from 'react';
 
 import ReactLogoSvg from '../../assets/react-logo.svg?react';
 import classes from './style.module.scss';
-import { WebApp } from '../../utils/tgWebApp';
 import { animateParticles } from './utils';
+import { themeParams } from '../Telegram';
 
 type AnimatedReactLogoProps = {
   color?: string;
 };
 
 const AnimatedReactLogo: FC<AnimatedReactLogoProps> = ({
-  color = WebApp.themeParams.link_color || '#3cbcd5',
+  color = themeParams.linkColor,
 }) => {
   const handleClick: MouseEventHandler<SVGElement> = (event) => {
-    animateParticles(
-      event,
-      'symbol',
-      WebApp.themeParams.link_color || '#3cbcd5',
-    );
+    animateParticles(event, 'symbol', themeParams.linkColor);
   };
 
   return (
