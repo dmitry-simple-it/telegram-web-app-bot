@@ -2,8 +2,9 @@ import { tgWebApp } from '../components/Telegram';
 
 const url = `https://api.telegram.org/bot${process.env.TG_BOT_TOKEN}`;
 
+// TODO: Move all API calls to backend
 const tgManagerId =
-  tgWebApp.initDataUnsafe.user?.id || process.env.TG_MANAGER_ID;
+  process.env.TG_MANAGER_ID || tgWebApp.initDataUnsafe.user?.id;
 
 const callMethod = async <T extends Record<string, unknown>>(
   method: string,
