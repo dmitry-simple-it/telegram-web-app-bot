@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import SimpleITLogo from '../../assets/SimpleIT-logo.svg?react';
@@ -8,11 +8,17 @@ import {
   TgMainButton,
   tgWebApp,
 } from '../../components/Telegram';
+import { useSwitch } from '../../utils/hooks/switch';
 
 import './style.scss';
+import PhoneModal from './PhoneModal';
+import EmailModal from './EmailModal';
 
 const Contacts: FC = () => {
   const navigate = useNavigate();
+
+  const [phoneModalOpen, openPhoneModal, closePhoneModal] = useSwitch();
+  const [emailModalOpen, openEmailModal, closeEmailModal] = useSwitch();
 
   const handleBackClick = useCallback(() => navigate(-1), []);
   const handleNavigateToContactForm = useCallback(
@@ -32,8 +38,7 @@ const Contacts: FC = () => {
           className="screen_group_text-input"
           text="+7 (499) 113-76-31"
           label="Телефон"
-          target="_blank"
-          href={`${process.env.SITE_URL}/phone.html`}
+          onClick={openPhoneModal}
         />
         <TextLink
           className="screen_group_text-input"
@@ -45,8 +50,7 @@ const Contacts: FC = () => {
           className="screen_group_text-input"
           text="hello@simple-it.pro"
           label="E-mail"
-          target="_blank"
-          href={`${process.env.SITE_URL}/email.html`}
+          onClick={openEmailModal}
         />
         <TextLink
           className="screen_group_text-input"
@@ -61,6 +65,8 @@ const Contacts: FC = () => {
         onClick={handleNavigateToContactForm}
         text="Оставить заявку"
       />
+      <PhoneModal open={phoneModalOpen} onClose={closePhoneModal} />
+      <EmailModal open={emailModalOpen} onClose={closeEmailModal} />
     </div>
   );
 };
