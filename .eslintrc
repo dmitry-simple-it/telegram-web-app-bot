@@ -13,7 +13,8 @@
   },
   "globals": {
     "JSX": true,
-    "React": true
+    "React": true,
+    "NodeJS": true
   },
   "ignorePatterns": ["/node_modules/**", "/build/**"]
 }
