@@ -9,6 +9,10 @@
   display: flex;
   justify-content: center;
 
+  &__scroll-hidden {
+    overflow: hidden;
+  }
+
   .fade-enter {
     opacity: 0;
     z-index: 1;

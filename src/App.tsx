@@ -91,10 +91,18 @@ const App: FC = () => {
     [cssTransitionClasses],
   );
 
+  const handleAnimationStart = () =>
+    document.body.classList.add('app-wrapper__scroll-hidden');
+
+  const handleAnimationEnd = () =>
+    document.body.classList.remove('app-wrapper__scroll-hidden');
+
   return (
     <>
       <TransitionGroup className="app-wrapper" childFactory={childFactory}>
         <CSSTransition
+          onEnter={handleAnimationStart}
+          onExited={handleAnimationEnd}
           key={location.pathname}
           classNames={cssTransitionClasses}
           timeout={300}
