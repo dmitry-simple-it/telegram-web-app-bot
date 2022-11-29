@@ -2,6 +2,7 @@ import { Drawable, Position2D, Size, Vector2D } from '../types';
 import Canvas2D from '../Canvas2D';
 import Particle from '../Particle';
 import { themeParams } from '../../components/Telegram';
+import { isMouseOver } from '../utils';
 
 type CanvasReactLogoOptions = {
   imagePath: string;
@@ -19,8 +20,11 @@ class CanvasReactLogo implements Drawable {
   private canvas2D: Canvas2D;
   private rotationAngle: number;
   private movingAngle: number;
-  size: Size;
-  pos: Vector2D;
+  private imageLoaded: boolean;
+  private mousePos: Vector2D;
+  private isMouseOver: boolean;
+  size: Size = { width: 0, height: 0 };
+  pos: Vector2D = { x: 0, y: 0 };
   rotationSpeed: number;
 
   constructor(
@@ -32,35 +36,26 @@ class CanvasReactLogo implements Drawable {
     this.rotationSpeed = rotationSpeed;
     this.basePosition = position;
     this.baseSize = size;
-    this.size = { width: 0, height: 0 };
-    this.pos = { x: 0, y: 0 };
-    this.movingAngle = Math.PI / 2;
-    this.movingSpeed = 0.3;
+    this.movingAngle = Math.PI / 6;
+    this.movingSpeed = 0.15;
+    this.mousePos = { x: 0, y: 0 };
+    this.isMouseOver = false;
+    this.imageLoaded = false;
     this.image = new Image();
     this.image.src = imagePath;
     this.image.onload = () => {
       this.size = this.calcSize();
       this.pos = this.calcPosition();
+      this.imageLoaded = true;
     };
 
     this.canvas2D.canvasEvents.subscribe(this, 'resize', this.handleResize);
-    this.canvas2D.canvasEvents.subscribe(this, 'click', (event) => {
-      Array.from({ length: 20 }).forEach(() =>
-        this.canvas2D.addDrawable(Particle, {
-          lifetime: 3000,
-          originPos: {
-            x: event.x,
-            y: event.y,
-          },
-        }),
-      );
-    });
+    this.canvas2D.canvasEvents.subscribe(this, 'click', this.handleClick);
     this.canvas2D.canvasEvents.subscribe(
       this,
-      'mouseenter',
-      this.handleMouseEnter,
+      'mousemovecanvas',
+      this.handleMouseMoveCanvas,
     );
-    this.canvas2D.canvasEvents.subscribe(this, 'mouseout', this.handleMouseOut);
   }
 
   private handleResize = () => {
@@ -68,12 +63,20 @@ class CanvasReactLogo implements Drawable {
     this.pos = this.calcPosition();
   };
 
-  private handleMouseEnter = () => {
-    this.canvas2D.context.canvas.style.cursor = 'pointer';
+  private handleMouseMoveCanvas = (event: MouseEvent) => {
+    this.mousePos = { x: event.x, y: event.y };
   };
 
-  private handleMouseOut = () => {
-    this.canvas2D.context.canvas.style.cursor = 'default';
+  private handleClick = (event: MouseEvent) => {
+    Array.from({ length: 20 }).forEach(() =>
+      this.canvas2D.addDrawable(Particle, {
+        lifetime: 3000,
+        originPos: {
+          x: event.x,
+          y: event.y,
+        },
+      }),
+    );
   };
 
   private calcSize = () => {
@@ -113,51 +116,49 @@ class CanvasReactLogo implements Drawable {
   dispose = () => {
     this.canvas2D.canvasEvents.unsubscribe(this, 'resize');
     this.canvas2D.canvasEvents.unsubscribe(this, 'click');
-    this.canvas2D.canvasEvents.unsubscribe(this, 'mouseenter');
-    this.canvas2D.canvasEvents.unsubscribe(this, 'mouseout');
+    this.canvas2D.canvasEvents.unsubscribe(this, 'mousemovecanvas');
   };
 
   // TODO: Rewrite this function
   draw = ({ elapsedTime }: Parameters<Drawable['draw']>[0]) => {
+    if (!this.imageLoaded) return;
+
     const halfWidth = this.size.width / 2;
     const halfHeight = this.size.height / 2;
 
     const movedBy = this.movingSpeed * elapsedTime;
-    const additionX =
-      movedBy * Math.cos(this.movingAngle) +
-      movedBy * Math.sin(this.movingAngle);
-    const additionY =
-      -movedBy * Math.sin(this.movingAngle) +
-      movedBy * Math.cos(this.movingAngle);
-    this.pos = { x: this.pos.x + additionX, y: this.pos.y + additionY };
-    if (this.pos.x + this.size.width >= this.canvas2D.context.canvas.width) {
+    const additionToX = movedBy * Math.cos(this.movingAngle);
+    const additionToY = movedBy * Math.sin(this.movingAngle);
+    this.pos = { x: this.pos.x + additionToX, y: this.pos.y + additionToY };
+
+    if (this.pos.x + this.size.width > this.canvas2D.context.canvas.width) {
       this.pos = {
         x: this.canvas2D.context.canvas.width - this.size.width,
-        y: this.pos.y + additionY,
+        y: this.pos.y,
       };
-      this.movingAngle -= Math.PI / 2;
-      if (this.movingAngle < 0)
-        this.movingAngle = 2 * Math.PI - this.movingAngle;
+      this.movingAngle =
+        Math.sign(this.movingAngle) * Math.acos(-Math.cos(this.movingAngle));
     }
-    if (this.pos.x <= 0) {
-      this.pos = { x: 0, y: this.pos.y + additionY };
-      this.movingAngle -= Math.PI / 2;
-      if (this.movingAngle >= 2 * Math.PI) this.movingAngle -= 2 * Math.PI;
+    if (this.pos.x < 0) {
+      this.pos = { x: 0, y: this.pos.y };
+      this.movingAngle =
+        Math.sign(this.movingAngle) * Math.acos(-Math.cos(this.movingAngle));
     }
-    if (this.pos.y + this.size.height >= this.canvas2D.context.canvas.height) {
+    if (this.pos.y + this.size.height > this.canvas2D.context.canvas.height) {
       this.pos = {
         x: this.pos.x,
         y: this.canvas2D.context.canvas.height - this.size.height,
       };
-      this.movingAngle -= Math.PI / 2;
-      if (this.movingAngle < 0)
-        this.movingAngle = 2 * Math.PI - this.movingAngle;
+      this.movingAngle = -this.movingAngle;
     }
-    if (this.pos.y <= 0) {
+    if (this.pos.y < 0) {
       this.pos = { x: this.pos.x, y: 0 };
-      this.movingAngle -= Math.PI / 2;
-      if (this.movingAngle >= 2 * Math.PI) this.movingAngle -= 2 * Math.PI;
+      this.movingAngle = -this.movingAngle;
     }
+
+    if (isMouseOver(this.pos, this.size, this.mousePos))
+      this.canvas2D.context.canvas.style.cursor = 'pointer';
+    else this.canvas2D.context.canvas.style.cursor = 'default';
 
     this.rotationAngle += elapsedTime * this.rotationSpeed * 0.001;
     if (this.rotationAngle >= 2 * Math.PI) this.rotationAngle = 0;

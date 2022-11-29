@@ -1,11 +1,13 @@
-import { Drawable, Size, Vector2D } from '../types';
+import { Drawable, Vector2D } from '../types';
 import Canvas2D from '../Canvas2D';
+import { isMouseOver } from '../utils';
 
 type CanvasEventHandler = {
   click: (event: MouseEvent) => void;
   mousemove: (event: MouseEvent) => void;
   mouseenter: (event: MouseEvent) => void;
   mouseout: (event: MouseEvent) => void;
+  mousemovecanvas: (event: MouseEvent) => void;
   resize: (event: Event) => void;
 };
 
@@ -27,16 +29,11 @@ class CanvasEvents {
       mousemove: new Map(),
       mouseenter: new Map(),
       mouseout: new Map(),
+      mousemovecanvas: new Map(),
       resize: new Map(),
     };
     this.prevMousePos = { x: 0, y: 0 };
   }
-
-  private isMouseOver = (pos: Vector2D, size: Size, mousePos: Vector2D) =>
-    mousePos.x > pos.x &&
-    mousePos.x < pos.x + size.width &&
-    mousePos.y > pos.y &&
-    mousePos.y < pos.y + size.height;
 
   private handleClickEvent = (event: MouseEvent) => {
     const mousePos = { x: event.x, y: event.y };
@@ -44,7 +41,7 @@ class CanvasEvents {
     for (const clickListener of clickListeners.entries()) {
       const entity = clickListener[0];
       if (entity instanceof Canvas2D) continue;
-      if (this.isMouseOver(entity.pos, entity.size, mousePos))
+      if (isMouseOver(entity.pos, entity.size, mousePos))
         clickListener[1](event);
     }
   };
@@ -55,8 +52,8 @@ class CanvasEvents {
       const entity = mouseEnterListener[0];
       if (entity instanceof Canvas2D) continue;
       if (
-        this.isMouseOver(entity.pos, entity.size, mousePos) &&
-        !this.isMouseOver(entity.pos, entity.size, this.prevMousePos)
+        isMouseOver(entity.pos, entity.size, mousePos) &&
+        !isMouseOver(entity.pos, entity.size, this.prevMousePos)
       )
         mouseEnterListener[1](event);
     }
@@ -64,16 +61,19 @@ class CanvasEvents {
       const entity = mouseOutListener[0];
       if (entity instanceof Canvas2D) continue;
       if (
-        !this.isMouseOver(entity.pos, entity.size, mousePos) &&
-        this.isMouseOver(entity.pos, entity.size, this.prevMousePos)
+        !isMouseOver(entity.pos, entity.size, mousePos) &&
+        isMouseOver(entity.pos, entity.size, this.prevMousePos)
       )
         mouseOutListener[1](event);
     }
     for (const mouseMoveListener of this.listeners.mousemove.entries()) {
       const entity = mouseMoveListener[0];
       if (entity instanceof Canvas2D) continue;
-      if (this.isMouseOver(entity.pos, entity.size, mousePos))
+      if (isMouseOver(entity.pos, entity.size, mousePos))
         mouseMoveListener[1](event);
+    }
+    for (const mouseMoveCanvasListener of this.listeners.mousemovecanvas.values()) {
+      mouseMoveCanvasListener(event);
     }
     this.prevMousePos = { x: event.x, y: event.y };
   };

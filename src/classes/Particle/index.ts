@@ -31,7 +31,7 @@ class Particle implements Drawable {
     { lifetime, originPos }: { lifetime: number; originPos: Vector2D },
   ) {
     this.canvas2D = canvas2D;
-    this.size = { width: 40, height: 40 };
+    this.size = this.calcSize();
     this.pos = { x: originPos.x - 20, y: originPos.y - 20 };
     this.angle = Math.random() * 2 * Math.PI;
     this.speed = Math.random() * 0.2;
@@ -44,6 +44,13 @@ class Particle implements Drawable {
     this.particleLifeTimeout = setTimeout(() => {
       this.canvas2D.removeDrawable(this);
     }, lifetime);
+  }
+
+  private calcSize() {
+    return {
+      width: this.canvas2D.context.canvas.width * 0.05,
+      height: this.canvas2D.context.canvas.width * 0.05,
+    };
   }
 
   dispose() {
