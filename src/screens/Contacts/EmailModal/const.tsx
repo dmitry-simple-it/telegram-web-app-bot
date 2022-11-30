@@ -3,6 +3,7 @@ import { themeParams } from '../../../components/Telegram';
 import EnvelopeIcon from '../../../assets/envelope.svg?react';
 import CopyIcon from '../../../assets/copy.svg?react';
 import customToast from '../../../components/CustomToast';
+import { isMobileOrTablet } from '../../../utils/isMobileOrTablet';
 
 const emailCopiedToastID = 'emailCopiedToastID';
 
@@ -19,15 +20,19 @@ export const emailModalList: Array<ListMenuItem> = [
   {
     text: 'Скопировать',
     icon: (props) => <CopyIcon {...props} fill={themeParams.linkColor} />,
-    onClick: () => {
-      const input = document.querySelector(`[data-inv-id="${invInputId}"]`) as
-        | HTMLInputElement
-        | undefined;
-      if (!input) return;
-      input.value = 'hello@simple-it.pro';
-      input.select();
-      input.setSelectionRange(0, 99999);
-      document.execCommand('copy');
+    onClick: async () => {
+      if (isMobileOrTablet) {
+        const input = document.querySelector(
+          `[data-inv-id="${invInputId}"]`,
+        ) as HTMLInputElement | undefined;
+        if (!input) return;
+        input.value = 'hello@simple-it.pro';
+        input.select();
+        input.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+      } else {
+        await navigator.clipboard.writeText('hello@simple-it.pro');
+      }
       customToast({
         text: 'Email скопирован',
         toastId: emailCopiedToastID,
