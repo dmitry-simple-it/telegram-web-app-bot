@@ -123,7 +123,7 @@ const ContactForm: FC = () => {
         <TextInput
           error={errors.username?.message}
           className="screen_group_text-input"
-          label="Ник в телеграмм"
+          label="Ник в телеграм"
           {...register('username', {
             required: 'Имя пользователя обязательный параметр',
           })}
