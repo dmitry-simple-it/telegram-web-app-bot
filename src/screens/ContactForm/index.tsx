@@ -65,6 +65,7 @@ const ContactForm: FC = () => {
         if (file) await sendDocument({ document: file });
       }
 
+      tgWebApp.disableClosingConfirmation();
       tgWebApp.close();
     } catch (error) {
       setFormError(
