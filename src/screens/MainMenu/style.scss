@@ -1,5 +1,6 @@
 .main-menu {
   flex-direction: row;
+  align-content: space-evenly;
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -11,11 +12,11 @@
     justify-content: space-around;
     flex-direction: column;
     width: 180px;
-    height: 215px;
+    height: 170px;
     cursor: pointer;
 
     &_image {
-      width: 150px;
+      width: 100px;
       user-select: none;
     }
 
