@@ -40,10 +40,10 @@ type TextareaProps = {
 const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ error, label, onChange, onFocus, onBlur, className, ...props }, ref) => {
     const [isLabelDown, setLabelDown] = useState(false);
+    const [errorDivWidth, setErrorDivWidth] = useState(-28);
 
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const errorMessageRef = useRef<HTMLDivElement | null>(null);
-    const errorMessageWidth = errorMessageRef.current?.clientWidth;
 
     const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
       onChange && onChange(event);
@@ -96,6 +96,10 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       }
     }, []);
 
+    useEffect(() => {
+      setErrorDivWidth(errorMessageRef.current?.clientWidth || -28);
+    }, [error]);
+
     return (
       <div className={classNames(className, classes.textarea)}>
         <textarea
@@ -115,10 +119,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             [classes.textarea_label__floating]: isLabelDown,
           })}
           style={{
-            width:
-              isLabelDown && errorMessageWidth
-                ? `calc(100% - ${errorMessageWidth + 28}px)`
-                : 'unset',
+            width: isLabelDown
+              ? `calc(100% - ${errorDivWidth + 28}px)`
+              : 'unset',
           }}
           onClick={handleLabelClick}
         >

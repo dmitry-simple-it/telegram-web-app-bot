@@ -20,11 +20,9 @@ type TextInputProps = {
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({ label, onFocus, onBlur, error, className, ...props }, ref) => {
     const [isLabelDown, setLabelDown] = useState(false);
+    const [errorDivWidth, setErrorDivWidth] = useState(-28);
 
     const inputRef = useRef<HTMLInputElement | null>(null);
-    const errorDivWidth = (
-      inputRef.current?.nextSibling?.nextSibling as HTMLDivElement
-    )?.clientWidth;
 
     useResize();
 
@@ -34,15 +32,22 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     };
 
     const handleInputBlur: FocusEventHandler<HTMLInputElement> = (event) => {
-      if (!inputRef.current?.value) setLabelDown(false);
+      if (!inputRef.current?.value.trim()) setLabelDown(false);
       onBlur && onBlur(event);
     };
 
     const handleLabelClick = () => inputRef.current?.focus();
 
     useEffect(() => {
-      inputRef.current?.value && setLabelDown(true);
+      inputRef.current?.value.trim() && setLabelDown(true);
     }, []);
+
+    useEffect(() => {
+      setErrorDivWidth(
+        (inputRef.current?.nextSibling?.nextSibling as HTMLDivElement)
+          ?.clientWidth || -28,
+      );
+    }, [error]);
 
     return (
       <div className={classNames(className, classes.textInput)}>

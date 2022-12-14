@@ -33,7 +33,7 @@ const ContactForm: FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<{
     name: string;
     organizationName: string;
@@ -84,12 +84,15 @@ const ContactForm: FC = () => {
 
   useEffect(() => {
     tgWebApp.expand();
-    tgWebApp.enableClosingConfirmation();
 
     return () => {
       tgWebApp.disableClosingConfirmation();
     };
   }, []);
+
+  useEffect(() => {
+    if (isDirty) tgWebApp.enableClosingConfirmation();
+  }, [isDirty]);
 
   return (
     <form className="screen contact-form" onSubmit={handleFormSubmit}>
@@ -99,7 +102,10 @@ const ContactForm: FC = () => {
           error={errors.name?.message}
           className="screen_group_text-input"
           label="Ваше имя"
-          {...register('name', { required: 'Имя обязательный параметр' })}
+          {...register('name', {
+            required: 'Имя обязательный параметр',
+            validate: (value) => !value.trim() && 'Имя обязательный параметр',
+          })}
         />
         <TextInput
           error={errors.organizationName?.message}
@@ -115,6 +121,7 @@ const ContactForm: FC = () => {
           {...register('email', {
             required: 'Email обязательный параметр',
             validate: (value) => {
+              if (!value.trim()) return 'Email обязательный параметр';
               const regex = /^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$/u;
               if (!value.match(regex)) return 'Некорректный формат email';
             },
@@ -126,6 +133,8 @@ const ContactForm: FC = () => {
           label="Ник в телеграм"
           {...register('username', {
             required: 'Имя пользователя обязательный параметр',
+            validate: (value) =>
+              !value.trim() && 'Имя пользователя обязательный параметр',
           })}
         />
       </div>
@@ -137,6 +146,8 @@ const ContactForm: FC = () => {
           className="screen_group_textarea"
           {...register('projectDescription', {
             required: 'Краткое описание проекта обязательно',
+            validate: (value) =>
+              !value.trim() && 'Краткое описание проекта обязательно',
           })}
         />
         {isMobileOrTablet && (
