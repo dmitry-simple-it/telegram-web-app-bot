@@ -34,6 +34,7 @@ const Contacts: FC = () => {
     <div className="screen contacts">
       <SimpleITLogo className="contacts_logo-image" />
       <div className="screen_group">
+        <div className="screen_group_title">Контакты для связи</div>
         <TextLink
           className="screen_group_text-input"
           text="+7 (499) 113-76-31"

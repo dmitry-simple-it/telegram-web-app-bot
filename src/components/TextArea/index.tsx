@@ -25,10 +25,11 @@ const changeTextAreaStyles = ({
   textArea.style.height = '1px';
   textArea.style.height = textArea.scrollHeight + 'px';
 
-  if (changeLabel)
-    label.style.transform = `translate(12px, ${-8 + textArea.scrollHeight}px)`;
+  label.style.transform = `translate(12px, ${
+    changeLabel ? textArea.scrollHeight - 8 : 12
+  }px)`;
 
-  if (error) error.style.top = -8.5 + textArea.scrollHeight + 'px';
+  if (error) error.style.top = -8 + textArea.scrollHeight + 'px';
 };
 
 type TextareaProps = {
@@ -75,7 +76,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       if (!textareaRef.current?.value) {
         setLabelDown(false);
         (textareaRef.current?.nextSibling as HTMLLabelElement).style.transform =
-          'translate(12px, 18px)';
+          'translate(12px, 12px)';
       }
       onBlur && onBlur(event);
     };
