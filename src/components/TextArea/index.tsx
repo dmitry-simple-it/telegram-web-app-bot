@@ -46,7 +46,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const errorMessageRef = useRef<HTMLDivElement | null>(null);
 
     const handleChange: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
-      onChange && onChange(event);
+      if (event.target.value.trim()) onChange && onChange(event);
+      else event.target.value = '';
 
       if (textareaRef.current)
         changeTextAreaStyles({

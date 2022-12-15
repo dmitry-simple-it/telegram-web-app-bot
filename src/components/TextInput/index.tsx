@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  ChangeEventHandler,
 } from 'react';
 import classNames from 'classnames';
 
@@ -18,7 +19,7 @@ type TextInputProps = {
 } & Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'placeholder'>;
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ label, onFocus, onBlur, error, className, ...props }, ref) => {
+  ({ label, onChange, onFocus, onBlur, error, className, ...props }, ref) => {
     const [isLabelDown, setLabelDown] = useState(false);
     const [errorDivWidth, setErrorDivWidth] = useState(-28);
 
@@ -29,6 +30,11 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     const handleInputFocus: FocusEventHandler<HTMLInputElement> = (event) => {
       setLabelDown(true);
       onFocus && onFocus(event);
+    };
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+      if (event.target.value.trim()) onChange && onChange(event);
+      else event.target.value = '';
     };
 
     const handleInputBlur: FocusEventHandler<HTMLInputElement> = (event) => {
@@ -55,6 +61,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           className={classes.textInput_input}
           autoComplete="off"
           {...props}
+          onChange={handleChange}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           ref={(node) => {
