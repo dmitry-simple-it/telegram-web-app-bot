@@ -1,0 +1,18 @@
+.service-description {
+  padding: 16px;
+
+  &_logo-image {
+    width: 200px;
+    height: 150px;
+    padding: 12px 8px;
+
+
+    & .SimpleIT-notebook_svg__fil0 {
+      fill: var(--tg-theme-text-color);
+    }
+
+    & .SimpleIT-notebook_svg__fil1 {
+      fill: var(--tg-theme-link-color);
+    }
+  }
+}

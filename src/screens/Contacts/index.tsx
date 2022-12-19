@@ -68,6 +68,9 @@ const Contacts: FC = () => {
       />
       <PhoneModal open={phoneModalOpen} onClose={closePhoneModal} />
       <EmailModal open={emailModalOpen} onClose={closeEmailModal} />
+      <button type="button" onClick={handleNavigateToContactForm}>
+        Click
+      </button>
     </div>
   );
 };

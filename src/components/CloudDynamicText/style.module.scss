@@ -1,0 +1,25 @@
+.cloud-dynamic {
+  position: relative;
+  align-items: center;
+
+  &_text {
+    background-color: var(--tg-theme-text-color);
+    border-radius: 24px;
+    padding: 18px 10px;
+    font-family: Open-Sans, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--tg-theme-bg-color);
+    text-align: center;
+  }
+
+  &_arrow {
+    border: 20px solid transparent;
+    border-left: 20px solid var(--tg-theme-text-color);
+    border-top: 20px solid var(--tg-theme-text-color);
+    box-sizing: border-box;
+    width: 20px;
+    position: relative;
+    top: -2px;
+  }
+}

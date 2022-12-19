@@ -6,12 +6,7 @@ import {
   useRef,
   useMemo,
 } from 'react';
-import {
-  Routes,
-  Route,
-  useLocation,
-  useNavigationType,
-} from 'react-router-dom';
+import { useLocation, useNavigationType, useRoutes } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { ToastContainer } from 'react-toastify';
 import { routes } from './routes';
@@ -26,6 +21,8 @@ const App: FC = () => {
   const navigationType = useNavigationType();
 
   const prevLocationRef = useRef(location.pathname);
+
+  const element = useRoutes(routes);
 
   const cssTransitionClasses = useMemo(() => {
     const prevLocationPathname = prevLocationRef.current;
@@ -107,15 +104,7 @@ const App: FC = () => {
           classNames={cssTransitionClasses}
           timeout={300}
         >
-          <Routes location={location}>
-            {routes.map((route) => (
-              <Route
-                path={route.path}
-                element={route.element}
-                key={route.path}
-              />
-            ))}
-          </Routes>
+          {element}
         </CSSTransition>
       </TransitionGroup>
       <ToastContainer />
