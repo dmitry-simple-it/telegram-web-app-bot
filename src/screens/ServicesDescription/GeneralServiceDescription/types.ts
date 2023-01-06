@@ -1,6 +1,5 @@
 export type MessageType<T extends string = string> = {
   text: string;
-  buttonText: string;
   next: T | null;
 };
 

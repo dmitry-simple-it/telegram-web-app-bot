@@ -6,9 +6,14 @@ import {
 } from 'react-router-dom';
 
 import CloudDynamicText from '../../../components/CloudDynamicText';
-import { TgBackButton, TgMainButton } from '../../../components/Telegram';
+import {
+  TgBackButton,
+  TgMainButton,
+  themeParams,
+} from '../../../components/Telegram';
 import { MessageType, MessagesRecordsType } from './types';
 import SimpleITLogo from '../../../assets/SimpleIT-notebook.svg?react';
+import ArrowRightSVG from '../../../assets/arrow-circle-right.svg?react';
 
 import './style.scss';
 
@@ -41,11 +46,8 @@ const GeneralServiceDescription = <T extends readonly [string, ...string[]]>({
     [messageParam],
   );
 
-  const handleBackButtonClick = () => navigate(-1);
-
-  const handleMainButtonClick = () => {
-    if (!message.next) return navigate('/contact_form');
-    else setSearchParams([['message', message.next]]);
+  const handleNextButton = () => {
+    if (message.next) setSearchParams([['message', message.next]]);
   };
 
   useEffect(() => {
@@ -60,13 +62,30 @@ const GeneralServiceDescription = <T extends readonly [string, ...string[]]>({
     <div className="screen service-description">
       <CloudDynamicText
         animate={animateText}
-        textSpeed={5}
+        textSpeed={3}
         refOnElemToPoint={logoRef}
         text={message.text}
       />
+
       <SimpleITLogo className="service-description_logo-image" ref={logoRef} />
-      <TgBackButton onClick={handleBackButtonClick} />
-      <TgMainButton onClick={handleMainButtonClick} text={message.buttonText} />
+
+      <div className="next-button-container">
+        {message.next && (
+          <div className="next-button" onClick={handleNextButton}>
+            <ArrowRightSVG
+              width={80}
+              height={80}
+              fill={themeParams.linkColor}
+            />
+          </div>
+        )}
+      </div>
+
+      <TgBackButton onClick={() => navigate(-1)} />
+      <TgMainButton
+        onClick={() => navigate('/contact_form')}
+        text="Оставить заявку"
+      />
     </div>
   );
 };

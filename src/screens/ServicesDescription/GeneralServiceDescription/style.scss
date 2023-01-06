@@ -16,3 +16,16 @@
     }
   }
 }
+
+.next-button-container {
+  height: 100%;
+  padding-bottom: 30px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.next-button {
+  padding: 20px;
+}
