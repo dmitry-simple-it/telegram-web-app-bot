@@ -103,8 +103,8 @@ const ContactForm: FC = () => {
           className="screen_group_text-input"
           label="Ваше имя"
           {...register('name', {
-            required: 'Имя обязательный параметр',
-            validate: (value) => !value.trim() && 'Имя обязательный параметр',
+            required: 'Обязательный параметр',
+            validate: (value) => !value.trim() && 'Обязательный параметр',
           })}
         />
         <TextInput
@@ -119,11 +119,11 @@ const ContactForm: FC = () => {
           autoCapitalize="none"
           label="Email для связи"
           {...register('email', {
-            required: 'Email обязательный параметр',
+            required: 'Обязательный параметр',
             validate: (value) => {
-              if (!value.trim()) return 'Email обязательный параметр';
+              if (!value.trim()) return 'Обязательный параметр';
               const regex = /^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$/u;
-              if (!value.match(regex)) return 'Некорректный формат email';
+              if (!value.match(regex)) return 'Некорректный формат';
             },
           })}
         />
@@ -141,13 +141,12 @@ const ContactForm: FC = () => {
       <div className="screen_group">
         <div className="screen_group_title">Информация о проекте</div>
         <TextArea
-          label="Краткое описание проекта"
+          label="Краткое описание"
           error={errors.projectDescription?.message}
           className="screen_group_textarea"
           {...register('projectDescription', {
             required: 'Краткое описание проекта обязательно',
-            validate: (value) =>
-              !value.trim() && 'Краткое описание проекта обязательно',
+            validate: (value) => !value.trim() && 'Описание обязательно',
           })}
         />
         {isMobileOrTablet && (
