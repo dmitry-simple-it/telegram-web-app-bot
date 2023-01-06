@@ -132,9 +132,8 @@ const ContactForm: FC = () => {
           className="screen_group_text-input"
           label="Ник в телеграм"
           {...register('username', {
-            required: 'Имя пользователя обязательный параметр',
-            validate: (value) =>
-              !value.trim() && 'Имя пользователя обязательный параметр',
+            required: 'Обязательный параметр',
+            validate: (value) => !value.trim() && 'Обязательный параметр',
           })}
         />
       </div>
@@ -145,7 +144,7 @@ const ContactForm: FC = () => {
           error={errors.projectDescription?.message}
           className="screen_group_textarea"
           {...register('projectDescription', {
-            required: 'Краткое описание проекта обязательно',
+            required: 'Описание обязательно',
             validate: (value) => !value.trim() && 'Описание обязательно',
           })}
         />
