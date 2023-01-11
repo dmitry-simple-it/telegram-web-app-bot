@@ -103,7 +103,8 @@ const ContactForm: FC = () => {
           className="screen_group_text-input"
           label="Ваше имя"
           {...register('name', {
-            validate: (value) => !value.trim() && '*обязательное поле',
+            validate: (value) =>
+              value.trim() ? undefined : '*обязательное поле',
           })}
         />
         <TextInput
@@ -130,7 +131,8 @@ const ContactForm: FC = () => {
           className="screen_group_text-input"
           label="Ник в телеграм"
           {...register('username', {
-            validate: (value) => !value.trim() && '*обязательное поле',
+            validate: (value) =>
+              value.trim() ? undefined : '*обязательное поле',
           })}
         />
       </div>
@@ -141,7 +143,8 @@ const ContactForm: FC = () => {
           error={errors.projectDescription?.message}
           className="screen_group_textarea"
           {...register('projectDescription', {
-            validate: (value) => !value.trim() && '*обязательное поле',
+            validate: (value) =>
+              value.trim() ? undefined : '*обязательное поле',
           })}
         />
         {isMobileOrTablet && (
