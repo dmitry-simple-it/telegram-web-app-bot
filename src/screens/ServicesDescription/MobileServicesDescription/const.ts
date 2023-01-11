@@ -1,29 +1,19 @@
-import { MessagesRecordsType } from '../GeneralServiceDescription/types';
+import { MessageType } from '../GeneralServiceDescription/types';
 
-export const mobileMessagesTypes = [
-  'initial',
-  'additional',
-  'techStack',
-  'links',
-] as const;
-
-export const mobileMessages: MessagesRecordsType<typeof mobileMessagesTypes> = {
-  initial: {
+export const mobileMessages: Array<MessageType> = [
+  {
     text: 'Одно из наших направлений - разработка мобильных приложений. Опыт нашей команды позволит Вам реализовать даже самые нетривиальные проекты',
-    next: 'additional',
   },
-  additional: {
+  {
     text: 'Приятным бонусом станет возможность не переплачивать за создание приложения для разных платформ (IOS/Android)',
-    next: 'techStack',
   },
-  techStack: {
+  {
     text: 'Мы используем современный и надежный фреймворк React Native, который позволяет создавать кроссплатформенные приложения и не требует написания отдельного кода для каждой из платформ.',
-    next: 'links',
   },
-  links: {
+  {
     text:
       'Ознакомиться с открытыми примерами можно в нашем <a href="https://simple-it.pro/portfolio/all-our-projects/" target="_blank">портфолио</a>.\n' +
       '  Давайте обсудим Ваш проект? Это абсолютно бесплатно! Просто нажмите на кнопку ниже.',
-    next: null,
+    buttonText: 'Отправить заявку',
   },
-};
+];

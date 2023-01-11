@@ -1,7 +1,4 @@
-export type MessageType<T extends string = string> = {
+export type MessageType = {
   text: string;
-  next: T | null;
+  buttonText?: string;
 };
-
-export type MessagesRecordsType<T extends readonly [string, ...string[]]> =
-  Record<T[number], MessageType<T[number]>>;

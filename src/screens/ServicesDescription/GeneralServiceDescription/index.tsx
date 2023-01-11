@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import {
   useNavigate,
   useNavigationType,
@@ -11,43 +11,43 @@ import {
   TgMainButton,
   themeParams,
 } from '../../../components/Telegram';
-import { MessageType, MessagesRecordsType } from './types';
+import { MessageType } from './types';
 import SimpleITLogo from '../../../assets/SimpleIT-notebook.svg?react';
 import ArrowRightSVG from '../../../assets/arrow-circle-right.svg?react';
+import ProgressDots from '../../../components/ProgressDots';
 
 import './style.scss';
 
-type ServiceScreenProps<T extends readonly [string, ...string[]]> = {
-  messages: MessagesRecordsType<T>;
-  messageTypes: T;
+type ServiceScreenProps = {
+  messages: Array<MessageType>;
 };
 
-const GeneralServiceDescription = <T extends readonly [string, ...string[]]>({
-  messages,
-  messageTypes,
-}: ServiceScreenProps<T>) => {
+const GeneralServiceDescription: FC<ServiceScreenProps> = ({ messages }) => {
   const navigationType = useNavigationType();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
-  const messageParam = searchParams.get('message');
+  const messageParam = Number(searchParams.get('message'));
 
   const [animateText, setAnimateText] = useState(navigationType !== 'POP');
 
   const logoRef = useRef<SVGElement>(null);
-  const prevMessageRef = useRef<MessageType<T[number]>>(
-    messages[messageTypes[0] as T[number]],
-  );
+  const prevMessageRef = useRef<MessageType>(messages[0]);
 
   const message = useMemo(
     () =>
       messageParam
-        ? messages[messageParam as T[number]] || prevMessageRef.current
-        : messages[messageTypes[0] as T[number]],
+        ? messages[messageParam] || prevMessageRef.current
+        : messages[0],
     [messageParam],
   );
 
+  const handleBackButton = () => navigate(-1);
+
+  const handleMainButton = () => navigate('/contact_form');
+
   const handleNextButton = () => {
-    if (message.next) setSearchParams([['message', message.next]]);
+    if (messages.length - 1 > messageParam)
+      setSearchParams([['message', `${messageParam + 1}`]]);
   };
 
   useEffect(() => {
@@ -60,32 +60,37 @@ const GeneralServiceDescription = <T extends readonly [string, ...string[]]>({
 
   return (
     <div className="screen service-description">
-      <CloudDynamicText
-        animate={animateText}
-        textSpeed={3}
-        refOnElemToPoint={logoRef}
-        text={message.text}
-      />
-
-      <SimpleITLogo className="service-description_logo-image" ref={logoRef} />
-
-      <div className="next-button-container">
-        {message.next && (
-          <div className="next-button" onClick={handleNextButton}>
-            <ArrowRightSVG
-              width={80}
-              height={80}
-              fill={themeParams.linkColor}
-            />
-          </div>
-        )}
+      <div className="service-description_message">
+        <CloudDynamicText
+          animate={animateText}
+          textSpeed={4}
+          refOnElemToPoint={logoRef}
+          text={message.text}
+        />
+        <SimpleITLogo
+          className="service-description_message_logo-image"
+          ref={logoRef}
+        />
       </div>
 
-      <TgBackButton onClick={() => navigate(-1)} />
-      <TgMainButton
-        onClick={() => navigate('/contact_form')}
-        text="Оставить заявку"
-      />
+      <div className="service-description_controls">
+        <div className="service-description_controls_empty" />
+        <ProgressDots
+          dotsNum={Object.entries(messages).length}
+          activeDot={messageParam}
+        />
+        <ArrowRightSVG
+          width={40}
+          height={40}
+          fill={themeParams.linkColor}
+          onClick={handleNextButton}
+        />
+      </div>
+
+      <TgBackButton onClick={handleBackButton} />
+      {message.buttonText && (
+        <TgMainButton onClick={handleMainButton} text={message.buttonText} />
+      )}
     </div>
   );
 };

@@ -1,13 +1,10 @@
 import { FC } from 'react';
 
 import GeneralServiceDescription from '../GeneralServiceDescription';
-import { mobileMessages, mobileMessagesTypes } from './const';
+import { mobileMessages } from './const';
 
 const MobileServicesDescription: FC = () => (
-  <GeneralServiceDescription
-    messages={mobileMessages}
-    messageTypes={mobileMessagesTypes}
-  />
+  <GeneralServiceDescription messages={mobileMessages} />
 );
 
 export default MobileServicesDescription;

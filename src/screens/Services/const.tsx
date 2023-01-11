@@ -12,7 +12,7 @@ export const servicesList: Array<ServiceItem> = [
   {
     icon: () => <PaperPlaneIcon fill={themeParams.linkColor} />,
     text: 'Разработка веб приложения',
-    route: '/services/mobile',
+    route: '/services/web',
   },
   {
     icon: () => <PaperPlaneIcon fill={themeParams.linkColor} />,
@@ -22,12 +22,12 @@ export const servicesList: Array<ServiceItem> = [
   {
     icon: () => <PaperPlaneIcon fill={themeParams.linkColor} />,
     text: 'Разработка телеграм бота',
-    route: '/services/mobile',
+    route: '/services/telegram',
   },
   {
     icon: () => <PaperPlaneIcon fill={themeParams.linkColor} />,
     text: 'Outstaff',
-    route: '/services/mobile',
+    route: '/services/outstaff',
   },
   {
     icon: () => <PaperPlaneIcon fill={themeParams.linkColor} />,

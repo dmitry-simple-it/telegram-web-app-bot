@@ -1,31 +1,35 @@
 .service-description {
   padding: 16px;
+  justify-content: space-between;
 
-  &_logo-image {
-    width: 200px;
-    height: 150px;
-    padding: 12px 8px;
+  &_message {
+
+    &_logo-image {
+      width: 200px;
+      height: 150px;
+      padding: 12px 8px;
 
 
-    & .SimpleIT-notebook_svg__fil0 {
-      fill: var(--tg-theme-text-color);
-    }
+      & .SimpleIT-notebook_svg__fil0 {
+        fill: var(--tg-theme-text-color);
+      }
 
-    & .SimpleIT-notebook_svg__fil1 {
-      fill: var(--tg-theme-link-color);
+      & .SimpleIT-notebook_svg__fil1 {
+        fill: var(--tg-theme-link-color);
+      }
     }
   }
-}
 
-.next-button-container {
-  height: 100%;
-  padding-bottom: 30px;
+  &_controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
 
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.next-button {
-  padding: 20px;
+    &_empty {
+      width: 40px;
+      height: 40px;
+      background-color: transparent;
+    }
+  }
 }

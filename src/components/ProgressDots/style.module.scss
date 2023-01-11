@@ -1,0 +1,29 @@
+.progress-dots {
+  display: flex;
+  align-items: center;
+
+  &_dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background-color: var(--tg-theme-text-color);
+    opacity: 0.6;
+    transition: all 0.5s ease;
+
+    margin: 0 2px;
+
+    &__active {
+      opacity: 1;
+      width: 8px;
+      height: 8px;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

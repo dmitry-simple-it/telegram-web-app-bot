@@ -7,6 +7,9 @@ import Contacts from './screens/Contacts';
 import Play from './screens/Play';
 import Services from './screens/Services';
 import { MobileServicesDescription } from './screens/ServicesDescription';
+import TelegramServicesDescription from './screens/ServicesDescription/TelegramServicesDescription';
+import WebServicesDescription from './screens/ServicesDescription/WebServicesDescription';
+import OutstaffServicesDescription from './screens/ServicesDescription/OutstaffServicesDescription';
 
 export const routes: Array<RouteObject> = [
   {
@@ -35,6 +38,18 @@ export const routes: Array<RouteObject> = [
       {
         path: 'mobile',
         element: <MobileServicesDescription />,
+      },
+      {
+        path: 'telegram',
+        element: <TelegramServicesDescription />,
+      },
+      {
+        path: 'web',
+        element: <WebServicesDescription />,
+      },
+      {
+        path: 'outstaff',
+        element: <OutstaffServicesDescription />,
       },
     ],
   },
