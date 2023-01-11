@@ -103,8 +103,7 @@ const ContactForm: FC = () => {
           className="screen_group_text-input"
           label="Ваше имя"
           {...register('name', {
-            required: 'Обязательный параметр',
-            validate: (value) => !value.trim() && 'Обязательный параметр',
+            validate: (value) => !value.trim() && '*обязательное поле',
           })}
         />
         <TextInput
@@ -119,11 +118,10 @@ const ContactForm: FC = () => {
           autoCapitalize="none"
           label="Email для связи"
           {...register('email', {
-            required: 'Обязательный параметр',
             validate: (value) => {
-              if (!value.trim()) return 'Обязательный параметр';
+              if (!value.trim()) return '*обязательное поле';
               const regex = /^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$/u;
-              if (!value.match(regex)) return 'Некорректный формат';
+              if (!value.match(regex)) return '*некорректный формат';
             },
           })}
         />
@@ -132,8 +130,7 @@ const ContactForm: FC = () => {
           className="screen_group_text-input"
           label="Ник в телеграм"
           {...register('username', {
-            required: 'Обязательный параметр',
-            validate: (value) => !value.trim() && 'Обязательный параметр',
+            validate: (value) => !value.trim() && '*обязательное поле',
           })}
         />
       </div>
@@ -144,8 +141,7 @@ const ContactForm: FC = () => {
           error={errors.projectDescription?.message}
           className="screen_group_textarea"
           {...register('projectDescription', {
-            required: 'Описание обязательно',
-            validate: (value) => !value.trim() && 'Описание обязательно',
+            validate: (value) => !value.trim() && '*обязательное поле',
           })}
         />
         {isMobileOrTablet && (
@@ -161,7 +157,7 @@ const ContactForm: FC = () => {
 
                 const fileSizeMB = file.size / (1024 * 1024);
                 if (fileSizeMB > 50)
-                  return 'Размер файла не должен превышать 50 мегабайт';
+                  return '*размер файла не должен превышать 50 мегабайт';
               },
             })}
           />
