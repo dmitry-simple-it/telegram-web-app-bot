@@ -47,7 +47,7 @@ const Play: FC = () => {
         ref={canvasRef}
         width="100%"
         height="100%"
-        style={{ width: '100%', height: '100%' }}
+        className="play-screen_canvas"
       />
       <TgBackButton onClick={handleBackClick} />
       <TgMainButton

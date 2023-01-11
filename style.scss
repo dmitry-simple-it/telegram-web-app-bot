@@ -1,5 +1,9 @@
 @import "./src/styles/theme.scss";
 
+html {
+  background-color: var(--tg-theme-secondary-bg-color);
+}
+
 html,
 body,
 #root {
