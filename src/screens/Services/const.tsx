@@ -32,6 +32,6 @@ export const servicesList: Array<ServiceItem> = [
   {
     icon: () => <PaperPlaneIcon fill={themeParams.linkColor} />,
     text: 'Прототипирование',
-    route: '/services/mobile',
+    route: '/services/prototyping',
   },
 ];
