@@ -14,7 +14,7 @@ const ProgressDots: FC<ProgressDotsProps> = ({ dotsNum, activeDot }) => {
   return (
     <div className={classes.progressDots}>
       {dotsArray.map((_, index) => (
-        <Dot active={activeDot === index} />
+        <Dot key={index} active={activeDot === index} />
       ))}
     </div>
   );
