@@ -13,3 +13,21 @@
     }
   }
 }
+
+.application-sent-modal {
+  color: var(--tg-theme-text-color);
+  font-family: Open-Sans, sans-serif;
+  padding: 18px;
+  margin: 12px;
+  text-align: center;
+
+  & > h3 {
+    margin: 0 0 8px;
+  }
+
+  & > p {
+    margin: 0 0 12px;
+    line-height: 28px;
+    font-size: 16px;
+  }
+}

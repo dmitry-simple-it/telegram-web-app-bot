@@ -26,7 +26,10 @@ const callMethod = async <T extends Record<string, unknown>>(
   }
 };
 
-export const sendMessage = (data: {
+export const sendMessage = ({
+  chat_id = tgManagerId as unknown as string,
+  ...data
+}: {
   text: string;
   parse_mode?: 'Markdown' | 'MarkdownV2' | 'HTML';
   entities?: string;
@@ -35,20 +38,23 @@ export const sendMessage = (data: {
   protect_content?: boolean;
   reply_to_message_id?: boolean;
   allow_sending_without_reply?: boolean;
+  chat_id?: string;
 }) =>
   callMethod('sendMessage', {
-    chat_id: tgManagerId,
+    chat_id,
     ...data,
   });
 
 export const sendDocument = async ({
   document,
+  chatId = tgManagerId as unknown as string,
 }: {
   document: File | string;
+  chatId?: string;
 }) => {
   try {
     const formData = new FormData();
-    formData.append('chat_id', tgManagerId as unknown as string);
+    formData.append('chat_id', chatId);
     formData.append('document', document);
     const response = await fetch(`${url}/sendDocument`, {
       method: 'POST',

@@ -12,11 +12,15 @@ import {
   TgMainButton,
   tgWebApp,
 } from '../../components/Telegram';
+import ApplicationSentModalProps from './ApplicationSentModal';
+import { useSwitch } from '../../utils/hooks/switch';
 
 import './style.scss';
 
 const ContactForm: FC = () => {
   const [formError, setFormError] = useState('');
+
+  const [appSentModalOpen, openAppSentModal, closeAppSentModal] = useSwitch();
 
   const navigate = useNavigate();
 
@@ -66,7 +70,7 @@ const ContactForm: FC = () => {
       }
 
       tgWebApp.disableClosingConfirmation();
-      tgWebApp.close();
+      openAppSentModal();
     } catch (error) {
       setFormError(
         error instanceof Error ? error.message : 'Что-то пошло не так',
@@ -173,6 +177,10 @@ const ContactForm: FC = () => {
         text="Отправить"
         active={!isSubmitting}
         progress={isSubmitting}
+      />
+      <ApplicationSentModalProps
+        open={appSentModalOpen}
+        onClose={closeAppSentModal}
       />
     </form>
   );

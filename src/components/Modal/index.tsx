@@ -12,12 +12,14 @@ import classNames from 'classnames';
 import classes from './style.module.scss';
 
 type ModalProps = {
-  open?: boolean;
   onClose: () => void;
+  className?: string;
+  open?: boolean;
 };
 
 const Modal: FC<PropsWithChildren<ModalProps>> = ({
   open,
+  className,
   onClose,
   children,
 }) => {
@@ -50,7 +52,9 @@ const Modal: FC<PropsWithChildren<ModalProps>> = ({
       onTransitionEnd={handleOverlayTransitionEnd}
       onClick={handleOverlayClick}
     >
-      <div className={classes.modal_wrapper}>{children}</div>
+      <div className={classNames(classes.modal_wrapper, className)}>
+        {children}
+      </div>
     </div>,
     document.body,
   );

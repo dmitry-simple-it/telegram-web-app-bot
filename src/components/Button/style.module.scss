@@ -1,0 +1,17 @@
+.button {
+  color: var(--tg-theme-button-text-color);
+  background-color: var(--tg-theme-button-color);
+  padding: 8px 18px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 4px;
+  vertical-align: middle;
+  text-align: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+}
+.button:active {
+  background-image: linear-gradient(rgba(0, 0, 0, 20%), rgba(0, 0, 0, 20%));
+}
