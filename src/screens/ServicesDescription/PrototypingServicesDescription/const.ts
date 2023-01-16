@@ -1,4 +1,6 @@
-export const prototypingMessages = [
+import { MessageRecordsType } from '../GeneralServiceDescription/types';
+
+export const prototypingMessages: MessageRecordsType = [
   {
     text: 'В ходе прототипирования создается макет, который имитирует взаимодействие пользователя с интерфейсом проекта.',
   },

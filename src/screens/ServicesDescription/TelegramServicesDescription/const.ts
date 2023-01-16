@@ -1,6 +1,6 @@
-import { MessageType } from '../GeneralServiceDescription/types';
+import { MessageRecordsType } from '../GeneralServiceDescription/types';
 
-export const telegramMessages: Array<MessageType> = [
+export const telegramMessages: MessageRecordsType = [
   {
     text: 'Если вы открыли эту страницу, значит, скорее всего, вы знаете, что активная аудитория Telegram составляет около 700 миллионов пользователей ежемесячно',
   },

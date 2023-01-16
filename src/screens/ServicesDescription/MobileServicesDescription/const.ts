@@ -1,6 +1,6 @@
-import { MessageType } from '../GeneralServiceDescription/types';
+import { MessageRecordsType } from '../GeneralServiceDescription/types';
 
-export const mobileMessages: Array<MessageType> = [
+export const mobileMessages: MessageRecordsType = [
   {
     text: 'Одно из наших направлений - разработка мобильных приложений. Опыт нашей команды позволит Вам реализовать даже самые нетривиальные проекты',
   },

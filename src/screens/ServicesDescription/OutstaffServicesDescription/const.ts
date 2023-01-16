@@ -1,6 +1,6 @@
-import { MessageType } from '../GeneralServiceDescription/types';
+import { MessageRecordsType } from '../GeneralServiceDescription/types';
 
-export const outstaffMessages: Array<MessageType> = [
+export const outstaffMessages: MessageRecordsType = [
   {
     text: 'Хотите усилить собственную команду? Или, может, Вам потребовался React разработчик на один проект? - Outstaff - лучшее решение!',
   },

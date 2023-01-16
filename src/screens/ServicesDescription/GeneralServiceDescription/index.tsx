@@ -1,5 +1,6 @@
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import {
+  useLocation,
   useNavigate,
   useNavigationType,
   useSearchParams,
@@ -11,7 +12,8 @@ import {
   TgMainButton,
   themeParams,
 } from '../../../components/Telegram';
-import { MessageType } from './types';
+import { MessageRecordsType } from './types';
+import { useIsMount } from '../../../utils/hooks/isMount';
 import SimpleITLogo from '../../../assets/SimpleIT-notebook.svg?react';
 import ArrowRightSVG from '../../../assets/arrow-circle-right.svg?react';
 import ProgressDots from '../../../components/ProgressDots';
@@ -19,27 +21,25 @@ import ProgressDots from '../../../components/ProgressDots';
 import './style.scss';
 
 type ServiceScreenProps = {
-  messages: Array<MessageType>;
+  messages: MessageRecordsType;
 };
 
 const GeneralServiceDescription: FC<ServiceScreenProps> = ({ messages }) => {
+  const location = useLocation();
   const navigationType = useNavigationType();
   const navigate = useNavigate();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const messageParam = Number(searchParams.get('message'));
+  const isMessageParamExists = !!searchParams.get('message');
 
+  const isMounted = useIsMount();
+
+  const [message, setMessage] = useState(messages[messageParam] || messages[0]);
   const [animateText, setAnimateText] = useState(navigationType !== 'POP');
 
+  const screenPathnameRef = useRef(location.pathname);
   const logoRef = useRef<SVGElement>(null);
-  const prevMessageRef = useRef<MessageType>(messages[0]);
-
-  const message = useMemo(
-    () =>
-      messageParam
-        ? messages[messageParam] || prevMessageRef.current
-        : messages[0],
-    [messageParam],
-  );
 
   const handleBackButton = () => navigate(-1);
 
@@ -51,12 +51,27 @@ const GeneralServiceDescription: FC<ServiceScreenProps> = ({ messages }) => {
   };
 
   useEffect(() => {
-    prevMessageRef.current = message;
-  }, [message]);
+    if (!isMounted) {
+      if (!isMessageParamExists || messageParam < 0)
+        setSearchParams([['message', '0']], { replace: true });
+
+      if (messageParam > messages.length - 1)
+        setSearchParams([['message', `${messages.length - 1}`]], {
+          replace: true,
+        });
+    }
+  }, [messageParam, messages, isMessageParamExists, setSearchParams]);
 
   useEffect(() => {
-    setAnimateText(navigationType !== 'POP');
-  }, [navigationType]);
+    isMessageParamExists &&
+      messages[messageParam] &&
+      setMessage(messages[messageParam]);
+  }, [messages, isMessageParamExists, messageParam]);
+
+  useEffect(() => {
+    screenPathnameRef.current === location.pathname &&
+      setAnimateText(navigationType !== 'POP');
+  }, [navigationType, location.pathname]);
 
   return (
     <div className="screen service-description">

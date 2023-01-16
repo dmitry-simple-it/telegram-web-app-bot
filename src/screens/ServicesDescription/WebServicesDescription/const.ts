@@ -1,6 +1,6 @@
-import { MessageType } from '../GeneralServiceDescription/types';
+import { MessageRecordsType } from '../GeneralServiceDescription/types';
 
-export const webMessages: Array<MessageType> = [
+export const webMessages: MessageRecordsType = [
   {
     text: 'А вы знали, что, практически, любой сайт с интерактивными элементами - это Веб-приложение?',
   },
